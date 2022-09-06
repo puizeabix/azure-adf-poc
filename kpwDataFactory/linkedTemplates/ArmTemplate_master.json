@@ -1,0 +1,133 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "kpwDataFactory"
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
+		},
+		"Sftp1_passPhrase": {
+			"type": "secureString",
+			"metadata": "Secure string for 'passPhrase' of 'Sftp1'"
+		},
+		"SqlServer1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SqlServer1'"
+		},
+		"AzureBatchUbuntu_properties_typeProperties_batchUri": {
+			"type": "string",
+			"defaultValue": "https://batcheus2unbuntu.eastus2.batch.azure.com"
+		},
+		"AzureBatchUbuntu_properties_typeProperties_poolName": {
+			"type": "string",
+			"defaultValue": "mypoolubuntu"
+		},
+		"AzureBatchUbuntu_properties_typeProperties_accountName": {
+			"type": "string",
+			"defaultValue": "batcheus2unbuntu"
+		},
+		"AzureBlobBatch_properties_typeProperties_connectionString_secretName": {
+			"type": "string",
+			"defaultValue": "batchStorageAccountCONN"
+		},
+		"AzureKeyVault_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://kpwkeyvault.vault.azure.net/"
+		},
+		"Sftp1_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "10.0.0.4"
+		},
+		"Sftp1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "azureuser"
+		},
+		"archive_blob_properties_typeProperties_serviceEndpoint": {
+			"type": "string",
+			"defaultValue": "https://kpwstorageaccount.blob.core.windows.net/"
+		},
+		"export_blob_properties_typeProperties_serviceEndpoint": {
+			"type": "string",
+			"defaultValue": "https://kpwstorageaccount.blob.core.windows.net/"
+		},
+		"logs_blob_properties_typeProperties_serviceEndpoint": {
+			"type": "string",
+			"defaultValue": "https://kpwstorageaccount.blob.core.windows.net/"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "kpwDataFactory_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureSqlDatabase1_connectionString": {
+						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
+					},
+					"Sftp1_passPhrase": {
+						"value": "[parameters('Sftp1_passPhrase')]"
+					},
+					"SqlServer1_connectionString": {
+						"value": "[parameters('SqlServer1_connectionString')]"
+					},
+					"AzureKeyVault_properties_typeProperties_baseUrl": {
+						"value": "[parameters('AzureKeyVault_properties_typeProperties_baseUrl')]"
+					},
+					"archive_blob_properties_typeProperties_serviceEndpoint": {
+						"value": "[parameters('archive_blob_properties_typeProperties_serviceEndpoint')]"
+					},
+					"export_blob_properties_typeProperties_serviceEndpoint": {
+						"value": "[parameters('export_blob_properties_typeProperties_serviceEndpoint')]"
+					},
+					"logs_blob_properties_typeProperties_serviceEndpoint": {
+						"value": "[parameters('logs_blob_properties_typeProperties_serviceEndpoint')]"
+					},
+					"AzureBlobBatch_properties_typeProperties_connectionString_secretName": {
+						"value": "[parameters('AzureBlobBatch_properties_typeProperties_connectionString_secretName')]"
+					},
+					"Sftp1_properties_typeProperties_host": {
+						"value": "[parameters('Sftp1_properties_typeProperties_host')]"
+					},
+					"Sftp1_properties_typeProperties_userName": {
+						"value": "[parameters('Sftp1_properties_typeProperties_userName')]"
+					},
+					"AzureBatchUbuntu_properties_typeProperties_batchUri": {
+						"value": "[parameters('AzureBatchUbuntu_properties_typeProperties_batchUri')]"
+					},
+					"AzureBatchUbuntu_properties_typeProperties_poolName": {
+						"value": "[parameters('AzureBatchUbuntu_properties_typeProperties_poolName')]"
+					},
+					"AzureBatchUbuntu_properties_typeProperties_accountName": {
+						"value": "[parameters('AzureBatchUbuntu_properties_typeProperties_accountName')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
