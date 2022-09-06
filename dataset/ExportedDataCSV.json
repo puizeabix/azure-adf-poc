@@ -10,6 +10,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@concat('users_', formatDateTime(convertTimeZone(utcNow(), 'UTC', 'Eastern Standard Time'), 'yyyy-MM-ddTHHmmss'), '.csv')",
+					"type": "Expression"
+				},
 				"folderPath": "exported",
 				"container": "dataexport"
 			},
