@@ -1,0 +1,6 @@
+{
+	"name": "ImportAzureBlobToSQL",
+	"properties": {
+		"annotations": []
+	}
+}
