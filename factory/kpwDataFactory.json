@@ -1,0 +1,9 @@
+{
+	"name": "kpwDataFactory",
+	"location": "eastasia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "0b9be318-b0d2-4459-9b44-568ffc86d16f",
+		"tenantId": "6de59d5e-8c80-4ca8-bd70-4a41627b4d4f"
+	}
+}

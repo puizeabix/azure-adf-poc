@@ -1,0 +1,39 @@
+{
+	"name": "Run Python",
+	"properties": {
+		"activities": [
+			{
+				"name": "testPipeline",
+				"type": "Custom",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"command": "python3 main.py",
+					"resourceLinkedService": {
+						"referenceName": "AzureBlobBatch",
+						"type": "LinkedServiceReference"
+					},
+					"folderPath": "input",
+					"referenceObjects": {
+						"linkedServices": [],
+						"datasets": []
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureBatchUbuntu",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-09-01T14:14:09Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

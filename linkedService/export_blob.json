@@ -1,0 +1,12 @@
+{
+	"name": "export_blob",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"serviceEndpoint": "https://kpwstorageaccount.blob.core.windows.net/",
+			"accountKind": "StorageV2"
+		}
+	}
+}
