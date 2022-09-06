@@ -1,0 +1,23 @@
+{
+	"name": "ExportedDataCSV",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "export_blob",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "exported",
+				"container": "dataexport"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
