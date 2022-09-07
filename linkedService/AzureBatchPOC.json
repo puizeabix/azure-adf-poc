@@ -1,0 +1,19 @@
+{
+	"name": "AzureBatchPOC",
+	"properties": {
+		"description": "east asia azure batch",
+		"annotations": [
+			"east-asia"
+		],
+		"type": "AzureBatch",
+		"typeProperties": {
+			"batchUri": "https://batcheastasiapoc.eastasia.batch.azure.com",
+			"poolName": "pool1",
+			"accountName": "batcheastasiapoc",
+			"linkedServiceName": {
+				"referenceName": "AzureBlobBatch",
+				"type": "LinkedServiceReference"
+			}
+		}
+	}
+}
