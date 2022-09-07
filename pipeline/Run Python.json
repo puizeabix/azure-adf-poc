@@ -27,7 +27,7 @@
 					}
 				},
 				"linkedServiceName": {
-					"referenceName": "AzureBatchUbuntu",
+					"referenceName": "AzureBatchPOC",
 					"type": "LinkedServiceReference"
 				}
 			}
