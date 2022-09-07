@@ -58,6 +58,10 @@
 		"AzureBatchUbuntu_properties_typeProperties_accountName": {
 			"type": "string",
 			"defaultValue": "batcheus2unbuntu"
+		},
+		"newFileInArchived_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/6fd627f3-9600-4a99-84df-ac54922ac175/resourceGroups/POC-data-pipeline/providers/Microsoft.Storage/storageAccounts/kpwstorageaccount"
 		}
 	},
 	"variables": {
@@ -751,6 +755,37 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/AzureSQLUsersTable')]",
 				"[concat(variables('factoryId'), '/datasets/ExportedDataCSV')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/newFileInArchived')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "ImportAzureBlobToSQL",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/testdatastorage/blobs/archived/",
+					"blobPathEndsWith": ".csv",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('newFileInArchived_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/ImportAzureBlobToSQL')]"
 			]
 		}
 	]

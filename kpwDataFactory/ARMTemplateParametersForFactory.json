@@ -43,6 +43,9 @@
 		},
 		"logs_blob_properties_typeProperties_serviceEndpoint": {
 			"value": "https://kpwstorageaccount.blob.core.windows.net/"
+		},
+		"newFileInArchived_properties_typeProperties_scope": {
+			"value": "/subscriptions/6fd627f3-9600-4a99-84df-ac54922ac175/resourceGroups/POC-data-pipeline/providers/Microsoft.Storage/storageAccounts/kpwstorageaccount"
 		}
 	}
 }
