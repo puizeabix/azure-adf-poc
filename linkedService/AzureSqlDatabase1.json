@@ -1,11 +1,18 @@
 {
 	"name": "AzureSqlDatabase1",
-	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
+		"parameters": {
+			"fqdn": {
+				"type": "string"
+			},
+			"username": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "AzureSqlDatabase",
 		"typeProperties": {
-			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=kpwdb.database.windows.net;Initial Catalog=datafactory;User ID=kpwadmin",
+			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=@{linkedService().fqdn};Initial Catalog=datafactory;User ID=@{linkedService().username}",
 			"password": {
 				"type": "AzureKeyVaultSecret",
 				"store": {
@@ -15,5 +22,6 @@
 				"secretName": "AzureSqlDBSecret"
 			}
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/linkedservices"
 }
