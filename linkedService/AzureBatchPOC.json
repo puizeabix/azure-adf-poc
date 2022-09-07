@@ -7,9 +7,9 @@
 		],
 		"type": "AzureBatch",
 		"typeProperties": {
-			"batchUri": "https://batcheastasiapoc.eastasia.batch.azure.com",
+			"batchUri": "https://azuzebatchservicepoc2.eastus.batch.azure.com",
 			"poolName": "pool1",
-			"accountName": "batcheastasiapoc",
+			"accountName": "azuzebatchservicepoc2",
 			"linkedServiceName": {
 				"referenceName": "AzureBlobBatch",
 				"type": "LinkedServiceReference"
