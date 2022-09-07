@@ -1,0 +1,42 @@
+{
+	"name": "DataPipeline1",
+	"properties": {
+		"description": "sFTP to Archived blob and to SQL",
+		"activities": [
+			{
+				"name": "sFTPToBlobArchived",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "sFTPToBlobArchived",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "ImportAzureBlobToSQL",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "sFTPToBlobArchived",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ImportAzureBlobToSQL",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": []
+	}
+}
