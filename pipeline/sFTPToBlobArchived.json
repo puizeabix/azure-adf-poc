@@ -59,13 +59,7 @@
 				"outputs": [
 					{
 						"referenceName": "AzureBlobArchived",
-						"type": "DatasetReference",
-						"parameters": {
-							"sinkfilename": {
-								"value": "@concat(replace(pipeline().parameters.sourcefilename, '.csv', '' ), '_', formatDateTime(convertTimeZone(utcNow(), 'UTC', 'Eastern Standard Time'), 'yyyy-MM-ddTHHmmss'), '.csv')",
-								"type": "Expression"
-							}
-						}
+						"type": "DatasetReference"
 					}
 				]
 			}
