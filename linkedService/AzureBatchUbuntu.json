@@ -1,12 +1,11 @@
 {
 	"name": "AzureBatchUbuntu",
-	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "AzureBatch",
 		"typeProperties": {
 			"batchUri": "https://batcheus2unbuntu.eastus2.batch.azure.com",
-			"poolName": "mypoolubuntu",
+			"poolName": "id2",
 			"accountName": "batcheus2unbuntu",
 			"linkedServiceName": {
 				"referenceName": "AzureBlobBatch",
@@ -21,5 +20,6 @@
 				"secretName": "azureBatchUbuntu"
 			}
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/linkedservices"
 }
