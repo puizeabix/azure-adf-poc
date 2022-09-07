@@ -18,7 +18,7 @@
 			"value": "https://batcheus2unbuntu.eastus2.batch.azure.com"
 		},
 		"AzureBatchUbuntu_properties_typeProperties_poolName": {
-			"value": "mypoolubuntu"
+			"value": "id2"
 		},
 		"AzureBatchUbuntu_properties_typeProperties_accountName": {
 			"value": "batcheus2unbuntu"
