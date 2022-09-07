@@ -13,7 +13,11 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [],
+				"userProperties": [
+					{
+						"name": "date"
+					}
+				],
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
