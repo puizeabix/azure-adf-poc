@@ -162,6 +162,38 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/ExportedDataCSV')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "export_blob",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": {
+							"value": "@concat('users_', formatDateTime(convertTimeZone(utcNow(), 'UTC', 'Eastern Standard Time'), 'yyyy-MM-ddTHHmmss'), '.csv')",
+							"type": "Expression"
+						},
+						"folderPath": "exported",
+						"container": "dataexport"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/export_blob')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AzureBlobBatch')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -263,38 +295,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ExportedDataCSV')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "export_blob",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": {
-							"value": "@concat('users_', formatDateTime(convertTimeZone(utcNow(), 'UTC', 'Eastern Standard Time'), 'yyyy-MM-ddTHHmmss'), '.csv')",
-							"type": "Expression"
-						},
-						"folderPath": "exported",
-						"container": "dataexport"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/export_blob')]"
 			]
 		},
 		{
@@ -402,62 +402,13 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Run Python')]",
+			"name": "[concat(parameters('factoryName'), '/ExportFromSQLToBlob')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "testPipeline",
-						"type": "Custom",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"command": "python3 main.py",
-							"resourceLinkedService": {
-								"referenceName": "AzureBlobBatch",
-								"type": "LinkedServiceReference"
-							},
-							"folderPath": "input",
-							"referenceObjects": {
-								"linkedServices": [],
-								"datasets": []
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "AzureBatchUbuntu",
-							"type": "LinkedServiceReference"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2022-09-01T14:14:09Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobBatch')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureBatchUbuntu')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/sFTPToBlobArchived')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Data Pipeline 1 read from sFTP server and backup it into Azure Blob Storage (archived)",
-				"activities": [
-					{
-						"name": "CopySFTPToBlob",
+						"name": "ExportFromSQLToBlob",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -470,17 +421,9 @@
 						"userProperties": [],
 						"typeProperties": {
 							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "SftpReadSettings",
-									"recursive": true,
-									"wildcardFileName": "*.csv",
-									"enablePartitionDiscovery": false,
-									"disableChunking": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
+								"type": "AzureSqlSource",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
 							},
 							"sink": {
 								"type": "DelimitedTextSink",
@@ -490,7 +433,7 @@
 								"formatSettings": {
 									"type": "DelimitedTextWriteSettings",
 									"quoteAllText": true,
-									"fileExtension": ".txt"
+									"fileExtension": ".csv"
 								}
 							},
 							"enableStaging": false,
@@ -505,14 +448,14 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "sFTPRawDataCSV",
+								"referenceName": "AzureSQLUsersTable",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "AzureBlobArchived",
+								"referenceName": "ExportedDataCSV",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -523,12 +466,11 @@
 					"elapsedTimeMetric": {},
 					"cancelAfter": {}
 				},
-				"annotations": [],
-				"lastPublishTime": "2022-09-06T08:30:02Z"
+				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/sFTPRawDataCSV')]",
-				"[concat(variables('factoryId'), '/datasets/AzureBlobArchived')]"
+				"[concat(variables('factoryId'), '/datasets/AzureSQLUsersTable')]",
+				"[concat(variables('factoryId'), '/datasets/ExportedDataCSV')]"
 			]
 		},
 		{
@@ -686,13 +628,62 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ExportFromSQLToBlob')]",
+			"name": "[concat(parameters('factoryName'), '/Run Python')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "ExportFromSQLToBlob",
+						"name": "testPipeline",
+						"type": "Custom",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"command": "python3 main.py",
+							"resourceLinkedService": {
+								"referenceName": "AzureBlobBatch",
+								"type": "LinkedServiceReference"
+							},
+							"folderPath": "input",
+							"referenceObjects": {
+								"linkedServices": [],
+								"datasets": []
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureBatchUbuntu",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-09-01T14:14:09Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobBatch')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureBatchUbuntu')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/sFTPToBlobArchived')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Data Pipeline 1 read from sFTP server and backup it into Azure Blob Storage (archived)",
+				"activities": [
+					{
+						"name": "CopySFTPToBlob",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -705,9 +696,17 @@
 						"userProperties": [],
 						"typeProperties": {
 							"source": {
-								"type": "AzureSqlSource",
-								"queryTimeout": "02:00:00",
-								"partitionOption": "None"
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "SftpReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*.csv",
+									"enablePartitionDiscovery": false,
+									"disableChunking": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
 							},
 							"sink": {
 								"type": "DelimitedTextSink",
@@ -717,7 +716,7 @@
 								"formatSettings": {
 									"type": "DelimitedTextWriteSettings",
 									"quoteAllText": true,
-									"fileExtension": ".csv"
+									"fileExtension": ".txt"
 								}
 							},
 							"enableStaging": false,
@@ -732,14 +731,14 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "AzureSQLUsersTable",
+								"referenceName": "sFTPRawDataCSV",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "ExportedDataCSV",
+								"referenceName": "AzureBlobArchived",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -750,11 +749,12 @@
 					"elapsedTimeMetric": {},
 					"cancelAfter": {}
 				},
-				"annotations": []
+				"annotations": [],
+				"lastPublishTime": "2022-09-06T08:30:02Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/AzureSQLUsersTable')]",
-				"[concat(variables('factoryId'), '/datasets/ExportedDataCSV')]"
+				"[concat(variables('factoryId'), '/datasets/sFTPRawDataCSV')]",
+				"[concat(variables('factoryId'), '/datasets/AzureBlobArchived')]"
 			]
 		},
 		{
@@ -763,7 +763,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Stopped",
+				"runtimeState": "Started",
 				"pipelines": [
 					{
 						"pipelineReference": {
@@ -785,6 +785,60 @@
 				}
 			},
 			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/ImportAzureBlobToSQL')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DataPipeline1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "sFTP to Archived blob and to SQL",
+				"activities": [
+					{
+						"name": "sFTPToBlobArchived",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "sFTPToBlobArchived",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "ImportAzureBlobToSQL",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "sFTPToBlobArchived",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "ImportAzureBlobToSQL",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/sFTPToBlobArchived')]",
 				"[concat(variables('factoryId'), '/pipelines/ImportAzureBlobToSQL')]"
 			]
 		}
