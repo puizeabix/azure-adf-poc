@@ -5,11 +5,20 @@
 			"referenceName": "Sftp1",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"sourcefilename": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "SftpLocation",
+				"fileName": {
+					"value": "@dataset().sourcefilename",
+					"type": "Expression"
+				},
 				"folderPath": "/home/azureuser/data"
 			},
 			"columnDelimiter": ",",

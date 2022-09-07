@@ -16,7 +16,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": {
-					"value": "@concat(replace(pipeline().parameters.pTriggerFile, '.csv', ''), '_',  formatDateTime(convertTimeZone(utcNow(), 'UTC', 'Eastern Standard Time'), 'yyyy-MM-ddTHHmmss'), '.csv')",
+					"value": "@concat(replace(dataset().pTriggerFile, '.csv', ''), '_',  formatDateTime(convertTimeZone(utcNow(), 'UTC', 'Eastern Standard Time'), 'yyyy-MM-ddTHHmmss'), '.csv')",
 					"type": "Expression"
 				},
 				"folderPath": "archived",
