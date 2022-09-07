@@ -6,7 +6,7 @@
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"pTriggerFile": {
+			"sinkfilename": {
 				"type": "string"
 			}
 		},
@@ -16,7 +16,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": {
-					"value": "@concat(replace(dataset().pTriggerFile, '.csv', ''), '_',  formatDateTime(convertTimeZone(utcNow(), 'UTC', 'Eastern Standard Time'), 'yyyy-MM-ddTHHmmss'), '.csv')",
+					"value": "@dataset().sinkfilename",
 					"type": "Expression"
 				},
 				"folderPath": "archived",
