@@ -63,6 +63,18 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/6fd627f3-9600-4a99-84df-ac54922ac175/resourceGroups/POC-data-pipeline/providers/Microsoft.Storage/storageAccounts/kpwstorageaccount"
 		},
+		"AzureBatchPOC_properties_typeProperties_batchUri": {
+			"type": "string",
+			"defaultValue": "https://batcheastasiapoc.eastasia.batch.azure.com"
+		},
+		"AzureBatchPOC_properties_typeProperties_poolName": {
+			"type": "string",
+			"defaultValue": "pool1"
+		},
+		"AzureBatchPOC_properties_typeProperties_accountName": {
+			"type": "string",
+			"defaultValue": "batcheastasiapoc"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -129,12 +141,41 @@
 					"AzureBatchUbuntu_properties_typeProperties_accountName": {
 						"value": "[parameters('AzureBatchUbuntu_properties_typeProperties_accountName')]"
 					},
+					"AzureBatchPOC_properties_typeProperties_batchUri": {
+						"value": "[parameters('AzureBatchPOC_properties_typeProperties_batchUri')]"
+					},
+					"AzureBatchPOC_properties_typeProperties_poolName": {
+						"value": "[parameters('AzureBatchPOC_properties_typeProperties_poolName')]"
+					},
+					"AzureBatchPOC_properties_typeProperties_accountName": {
+						"value": "[parameters('AzureBatchPOC_properties_typeProperties_accountName')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "kpwDataFactory_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
 					"newFileInArchived_properties_typeProperties_scope": {
 						"value": "[parameters('newFileInArchived_properties_typeProperties_scope')]"
 					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'kpwDataFactory_ArmTemplate_0')]"
+			]
 		}
 	]
 }
