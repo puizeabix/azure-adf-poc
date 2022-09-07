@@ -15,10 +15,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "SftpLocation",
-				"fileName": {
-					"value": "@dataset().sourcefilename",
-					"type": "Expression"
-				},
 				"folderPath": "/home/azureuser/data"
 			},
 			"columnDelimiter": ",",
