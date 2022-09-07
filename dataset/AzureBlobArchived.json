@@ -5,20 +5,11 @@
 			"referenceName": "archive_blob",
 			"type": "LinkedServiceReference"
 		},
-		"parameters": {
-			"sinkfilename": {
-				"type": "string"
-			}
-		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": {
-					"value": "@dataset().sinkfilename",
-					"type": "Expression"
-				},
 				"folderPath": "archived",
 				"container": "testdatastorage"
 			},
