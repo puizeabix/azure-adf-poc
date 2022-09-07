@@ -19,6 +19,18 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'SqlServer1'"
 		},
+		"AzureBatchPOC_properties_typeProperties_batchUri": {
+			"type": "string",
+			"defaultValue": "https://azuzebatchservicepoc2.eastus.batch.azure.com"
+		},
+		"AzureBatchPOC_properties_typeProperties_poolName": {
+			"type": "string",
+			"defaultValue": "pool3"
+		},
+		"AzureBatchPOC_properties_typeProperties_accountName": {
+			"type": "string",
+			"defaultValue": "azuzebatchservicepoc2"
+		},
 		"AzureBatchUbuntu_properties_typeProperties_batchUri": {
 			"type": "string",
 			"defaultValue": "https://batcheus2unbuntu.eastus2.batch.azure.com"
@@ -62,18 +74,6 @@
 		"newFileInArchived_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/6fd627f3-9600-4a99-84df-ac54922ac175/resourceGroups/POC-data-pipeline/providers/Microsoft.Storage/storageAccounts/kpwstorageaccount"
-		},
-		"AzureBatchPOC_properties_typeProperties_batchUri": {
-			"type": "string",
-			"defaultValue": "https://azuzebatchservicepoc2.eastus.batch.azure.com"
-		},
-		"AzureBatchPOC_properties_typeProperties_poolName": {
-			"type": "string",
-			"defaultValue": "pool1"
-		},
-		"AzureBatchPOC_properties_typeProperties_accountName": {
-			"type": "string",
-			"defaultValue": "azuzebatchservicepoc2"
 		},
 		"containerUri": {
 			"type": "string",
@@ -132,15 +132,6 @@
 					"Sftp1_properties_typeProperties_userName": {
 						"value": "[parameters('Sftp1_properties_typeProperties_userName')]"
 					},
-					"AzureBatchUbuntu_properties_typeProperties_batchUri": {
-						"value": "[parameters('AzureBatchUbuntu_properties_typeProperties_batchUri')]"
-					},
-					"AzureBatchUbuntu_properties_typeProperties_poolName": {
-						"value": "[parameters('AzureBatchUbuntu_properties_typeProperties_poolName')]"
-					},
-					"AzureBatchUbuntu_properties_typeProperties_accountName": {
-						"value": "[parameters('AzureBatchUbuntu_properties_typeProperties_accountName')]"
-					},
 					"AzureBatchPOC_properties_typeProperties_batchUri": {
 						"value": "[parameters('AzureBatchPOC_properties_typeProperties_batchUri')]"
 					},
@@ -149,6 +140,15 @@
 					},
 					"AzureBatchPOC_properties_typeProperties_accountName": {
 						"value": "[parameters('AzureBatchPOC_properties_typeProperties_accountName')]"
+					},
+					"AzureBatchUbuntu_properties_typeProperties_batchUri": {
+						"value": "[parameters('AzureBatchUbuntu_properties_typeProperties_batchUri')]"
+					},
+					"AzureBatchUbuntu_properties_typeProperties_poolName": {
+						"value": "[parameters('AzureBatchUbuntu_properties_typeProperties_poolName')]"
+					},
+					"AzureBatchUbuntu_properties_typeProperties_accountName": {
+						"value": "[parameters('AzureBatchUbuntu_properties_typeProperties_accountName')]"
 					}
 				}
 			},

@@ -14,6 +14,15 @@
 		"SqlServer1_connectionString": {
 			"value": ""
 		},
+		"AzureBatchPOC_properties_typeProperties_batchUri": {
+			"value": "https://azuzebatchservicepoc2.eastus.batch.azure.com"
+		},
+		"AzureBatchPOC_properties_typeProperties_poolName": {
+			"value": "pool3"
+		},
+		"AzureBatchPOC_properties_typeProperties_accountName": {
+			"value": "azuzebatchservicepoc2"
+		},
 		"AzureBatchUbuntu_properties_typeProperties_batchUri": {
 			"value": "https://batcheus2unbuntu.eastus2.batch.azure.com"
 		},
@@ -46,15 +55,6 @@
 		},
 		"newFileInArchived_properties_typeProperties_scope": {
 			"value": "/subscriptions/6fd627f3-9600-4a99-84df-ac54922ac175/resourceGroups/POC-data-pipeline/providers/Microsoft.Storage/storageAccounts/kpwstorageaccount"
-		},
-		"AzureBatchPOC_properties_typeProperties_batchUri": {
-			"value": "https://azuzebatchservicepoc2.eastus.batch.azure.com"
-		},
-		"AzureBatchPOC_properties_typeProperties_poolName": {
-			"value": "pool1"
-		},
-		"AzureBatchPOC_properties_typeProperties_accountName": {
-			"value": "azuzebatchservicepoc2"
 		},
 		"containerUri": {
 			"value": ""

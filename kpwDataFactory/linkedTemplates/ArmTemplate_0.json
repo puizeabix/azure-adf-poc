@@ -47,6 +47,18 @@
 			"type": "string",
 			"defaultValue": "azureuser"
 		},
+		"AzureBatchPOC_properties_typeProperties_batchUri": {
+			"type": "string",
+			"defaultValue": "https://azuzebatchservicepoc2.eastus.batch.azure.com"
+		},
+		"AzureBatchPOC_properties_typeProperties_poolName": {
+			"type": "string",
+			"defaultValue": "pool3"
+		},
+		"AzureBatchPOC_properties_typeProperties_accountName": {
+			"type": "string",
+			"defaultValue": "azuzebatchservicepoc2"
+		},
 		"AzureBatchUbuntu_properties_typeProperties_batchUri": {
 			"type": "string",
 			"defaultValue": "https://batcheus2unbuntu.eastus2.batch.azure.com"
@@ -58,18 +70,6 @@
 		"AzureBatchUbuntu_properties_typeProperties_accountName": {
 			"type": "string",
 			"defaultValue": "batcheus2unbuntu"
-		},
-		"AzureBatchPOC_properties_typeProperties_batchUri": {
-			"type": "string",
-			"defaultValue": "https://azuzebatchservicepoc2.eastus.batch.azure.com"
-		},
-		"AzureBatchPOC_properties_typeProperties_poolName": {
-			"type": "string",
-			"defaultValue": "pool1"
-		},
-		"AzureBatchPOC_properties_typeProperties_accountName": {
-			"type": "string",
-			"defaultValue": "azuzebatchservicepoc2"
 		}
 	},
 	"variables": {
@@ -388,6 +388,30 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureBatchPOC')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "east asia azure batch",
+				"annotations": [
+					"east-asia"
+				],
+				"type": "AzureBatch",
+				"typeProperties": {
+					"batchUri": "[parameters('AzureBatchPOC_properties_typeProperties_batchUri')]",
+					"poolName": "[parameters('AzureBatchPOC_properties_typeProperties_poolName')]",
+					"accountName": "[parameters('AzureBatchPOC_properties_typeProperties_accountName')]",
+					"linkedServiceName": {
+						"referenceName": "AzureBlobBatch",
+						"type": "LinkedServiceReference"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobBatch')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AzureBatchUbuntu')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -415,30 +439,6 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobBatch')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureBatchPOC')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "east asia azure batch",
-				"annotations": [
-					"east-asia"
-				],
-				"type": "AzureBatch",
-				"typeProperties": {
-					"batchUri": "[parameters('AzureBatchPOC_properties_typeProperties_batchUri')]",
-					"poolName": "[parameters('AzureBatchPOC_properties_typeProperties_poolName')]",
-					"accountName": "[parameters('AzureBatchPOC_properties_typeProperties_accountName')]",
-					"linkedServiceName": {
-						"referenceName": "AzureBlobBatch",
-						"type": "LinkedServiceReference"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobBatch')]"
 			]
 		},
 		{
