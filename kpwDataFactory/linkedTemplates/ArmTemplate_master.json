@@ -65,7 +65,7 @@
 		},
 		"AzureBatchPOC_properties_typeProperties_batchUri": {
 			"type": "string",
-			"defaultValue": "https://batcheastasiapoc.eastasia.batch.azure.com"
+			"defaultValue": "https://azuzebatchservicepoc2.eastus.batch.azure.com"
 		},
 		"AzureBatchPOC_properties_typeProperties_poolName": {
 			"type": "string",
@@ -73,7 +73,7 @@
 		},
 		"AzureBatchPOC_properties_typeProperties_accountName": {
 			"type": "string",
-			"defaultValue": "batcheastasiapoc"
+			"defaultValue": "azuzebatchservicepoc2"
 		},
 		"containerUri": {
 			"type": "string",

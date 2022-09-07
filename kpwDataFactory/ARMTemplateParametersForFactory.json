@@ -48,13 +48,13 @@
 			"value": "/subscriptions/6fd627f3-9600-4a99-84df-ac54922ac175/resourceGroups/POC-data-pipeline/providers/Microsoft.Storage/storageAccounts/kpwstorageaccount"
 		},
 		"AzureBatchPOC_properties_typeProperties_batchUri": {
-			"value": "https://batcheastasiapoc.eastasia.batch.azure.com"
+			"value": "https://azuzebatchservicepoc2.eastus.batch.azure.com"
 		},
 		"AzureBatchPOC_properties_typeProperties_poolName": {
 			"value": "pool1"
 		},
 		"AzureBatchPOC_properties_typeProperties_accountName": {
-			"value": "batcheastasiapoc"
+			"value": "azuzebatchservicepoc2"
 		}
 	}
 }
