@@ -5,11 +5,6 @@
 			"referenceName": "Sftp1",
 			"type": "LinkedServiceReference"
 		},
-		"parameters": {
-			"sourcefilename": {
-				"type": "string"
-			}
-		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
