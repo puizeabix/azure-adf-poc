@@ -5,11 +5,20 @@
 			"referenceName": "archive_blob",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"pTriggerFile": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@concat(replace(pipeline().parameters.pTriggerFile, '.csv', ''), '_',  formatDateTime(convertTimeZone(utcNow(), 'UTC', 'Eastern Standard Time'), 'yyyy-MM-ddTHHmmss'), '.csv')",
+					"type": "Expression"
+				},
 				"folderPath": "archived",
 				"container": "testdatastorage"
 			},
