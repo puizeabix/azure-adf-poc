@@ -1,0 +1,50 @@
+{
+	"name": "DataPipeline-1",
+	"properties": {
+		"activities": [
+			{
+				"name": "sFTPToArchivedUserDefinedParameters",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "sFTPToArchivedUserDefinedParameters",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "ImportFromBlobToSQL",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "sFTPToArchivedUserDefinedParameters",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ImportFromBlobToSQL",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"date": {
+							"value": "@activity('sFTPToArchivedUserDefinedParameters').output",
+							"type": "Expression"
+						}
+					}
+				}
+			}
+		],
+		"folder": {
+			"name": "v2"
+		},
+		"annotations": []
+	}
+}
