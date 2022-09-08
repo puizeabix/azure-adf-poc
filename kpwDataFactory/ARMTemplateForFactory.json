@@ -379,7 +379,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"command": "python3 main.py",
+							"command": "id -u && sudo docker run azurebatchpoc.azurecr.io/batchapp4",
 							"resourceLinkedService": {
 								"referenceName": "AzureBlobBatch",
 								"type": "LinkedServiceReference"
