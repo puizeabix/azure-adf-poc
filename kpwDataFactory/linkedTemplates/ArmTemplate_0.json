@@ -684,8 +684,30 @@
 								"type": "LinkedServiceReference"
 							},
 							"folderPath": "input",
+							"extendedProperties": {},
 							"referenceObjects": {
-								"linkedServices": [],
+								"linkedServices": [
+									{
+										"referenceName": "AzureSqlDatabase1",
+										"type": "LinkedServiceReference",
+										"parameters": {}
+									},
+									{
+										"referenceName": "Sftp1",
+										"type": "LinkedServiceReference",
+										"parameters": {}
+									},
+									{
+										"referenceName": "export_blob",
+										"type": "LinkedServiceReference",
+										"parameters": {}
+									},
+									{
+										"referenceName": "archive_blob",
+										"type": "LinkedServiceReference",
+										"parameters": {}
+									}
+								],
 								"datasets": [
 									{
 										"referenceName": "sFTPRawDataCSV",
@@ -722,6 +744,10 @@
 				"[concat(variables('factoryId'), '/datasets/sFTPRawDataCSV')]",
 				"[concat(variables('factoryId'), '/datasets/AzureBlobArchived')]",
 				"[concat(variables('factoryId'), '/datasets/AzureSQLUsersTable')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]",
+				"[concat(variables('factoryId'), '/linkedServices/Sftp1')]",
+				"[concat(variables('factoryId'), '/linkedServices/export_blob')]",
+				"[concat(variables('factoryId'), '/linkedServices/archive_blob')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobBatch')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureBatchPOC')]"
 			]
