@@ -22,7 +22,24 @@
 					},
 					"folderPath": "input",
 					"referenceObjects": {
-						"linkedServices": [],
+						"linkedServices": [
+							{
+								"referenceName": "AzureSqlDatabase1",
+								"type": "LinkedServiceReference"
+							},
+							{
+								"referenceName": "Sftp1",
+								"type": "LinkedServiceReference"
+							},
+							{
+								"referenceName": "export_blob",
+								"type": "LinkedServiceReference"
+							},
+							{
+								"referenceName": "archive_blob",
+								"type": "LinkedServiceReference"
+							}
+						],
 						"datasets": [
 							{
 								"referenceName": "sFTPRawDataCSV",
