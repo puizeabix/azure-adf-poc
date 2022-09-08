@@ -387,7 +387,23 @@
 							"folderPath": "input",
 							"referenceObjects": {
 								"linkedServices": [],
-								"datasets": []
+								"datasets": [
+									{
+										"referenceName": "sFTPRawDataCSV",
+										"type": "DatasetReference",
+										"parameters": {}
+									},
+									{
+										"referenceName": "AzureBlobArchived",
+										"type": "DatasetReference",
+										"parameters": {}
+									},
+									{
+										"referenceName": "AzureSQLUsersTable",
+										"type": "DatasetReference",
+										"parameters": {}
+									}
+								]
 							}
 						},
 						"linkedServiceName": {
@@ -404,6 +420,9 @@
 				"lastPublishTime": "2022-09-01T14:14:09Z"
 			},
 			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/sFTPRawDataCSV')]",
+				"[concat(variables('factoryId'), '/datasets/AzureBlobArchived')]",
+				"[concat(variables('factoryId'), '/datasets/AzureSQLUsersTable')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobBatch')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureBatchPOC')]"
 			]
