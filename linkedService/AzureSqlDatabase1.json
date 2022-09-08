@@ -4,7 +4,7 @@
 		"annotations": [],
 		"type": "AzureSqlDatabase",
 		"typeProperties": {
-			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=@{linkedService().fqdn};Initial Catalog=datafactory;User ID=kpwadmin",
+			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=kpwdb.database.windows.net;Initial Catalog=datafactory;User ID=kpwadmin",
 			"password": {
 				"type": "AzureKeyVaultSecret",
 				"store": {
