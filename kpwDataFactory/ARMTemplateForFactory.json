@@ -379,7 +379,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"command": "/bin/bash -c \"pwd && ls -aR\"",
+							"command": "/bin/bash -c \"pwd && ls -aR && cat activity.json && cat datasets.json\"",
 							"resourceLinkedService": {
 								"referenceName": "AzureBlobBatch",
 								"type": "LinkedServiceReference"
