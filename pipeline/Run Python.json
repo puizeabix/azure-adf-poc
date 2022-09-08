@@ -23,7 +23,20 @@
 					"folderPath": "input",
 					"referenceObjects": {
 						"linkedServices": [],
-						"datasets": []
+						"datasets": [
+							{
+								"referenceName": "sFTPRawDataCSV",
+								"type": "DatasetReference"
+							},
+							{
+								"referenceName": "AzureBlobArchived",
+								"type": "DatasetReference"
+							},
+							{
+								"referenceName": "AzureSQLUsersTable",
+								"type": "DatasetReference"
+							}
+						]
 					}
 				},
 				"linkedServiceName": {
