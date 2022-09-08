@@ -379,13 +379,12 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"command": "/bin/bash -c \"pwd && ls -aR && echo \"\\n\" && cat activity.json && echo \"\\n\" && cat datasets.json && echo \"\\n\" && cat linkedServices.json\"",
+							"command": "/bin/bash -c \"docker run azurebatchpoc.azurecr.io/batchapp_exit1\"",
 							"resourceLinkedService": {
 								"referenceName": "AzureBlobBatch",
 								"type": "LinkedServiceReference"
 							},
 							"folderPath": "input",
-							"extendedProperties": {},
 							"referenceObjects": {
 								"linkedServices": [
 									{
