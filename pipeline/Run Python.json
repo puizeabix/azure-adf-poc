@@ -15,7 +15,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"command": "/bin/bash -c \"id -u -n\"",
+					"command": "/bin/bash -c \"docker run azurebatchpoc.azurecr.io/batchapp4\"",
 					"resourceLinkedService": {
 						"referenceName": "AzureBlobBatch",
 						"type": "LinkedServiceReference"
