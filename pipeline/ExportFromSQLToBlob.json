@@ -44,7 +44,13 @@
 				"inputs": [
 					{
 						"referenceName": "AzureSQLUsersTable",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"Secret": {
+								"value": "@pipeline().globalParameters.SQLServerKeyVaultSecretName",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"outputs": [
