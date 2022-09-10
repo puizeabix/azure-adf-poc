@@ -1,5 +1,13 @@
 {
 	"name": "kpwDataFactory",
+	"properties": {
+		"globalParameters": {
+			"SQLServerKeyVaultSecretName": {
+				"type": "string",
+				"value": "AzureSqlDBSecret"
+			}
+		}
+	},
 	"location": "eastasia",
 	"identity": {
 		"type": "SystemAssigned",
