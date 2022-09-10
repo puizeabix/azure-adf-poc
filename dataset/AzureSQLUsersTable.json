@@ -3,7 +3,13 @@
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSqlDatabase1",
-			"type": "LinkedServiceReference"
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"KeyVaultSecretName": {
+					"value": "@dataset().Secret",
+					"type": "Expression"
+				}
+			}
 		},
 		"parameters": {
 			"Secret": {
