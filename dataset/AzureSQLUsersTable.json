@@ -5,6 +5,12 @@
 			"referenceName": "AzureSqlDatabase1",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"Secret": {
+				"type": "string",
+				"defaultValue": "AzureSqlDBSecret"
+			}
+		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [
