@@ -1,6 +1,12 @@
 {
 	"name": "AzureSqlDatabase1",
 	"properties": {
+		"parameters": {
+			"KeyVaultSecretName": {
+				"type": "string",
+				"defaultValue": "AzureSqlDBSecret"
+			}
+		},
 		"annotations": [],
 		"type": "AzureSqlDatabase",
 		"typeProperties": {
@@ -11,7 +17,10 @@
 					"referenceName": "AzureKeyVault",
 					"type": "LinkedServiceReference"
 				},
-				"secretName": "AzureSqlDBSecret"
+				"secretName": {
+					"value": "@linkedService().KeyVaultSecretName",
+					"type": "Expression"
+				}
 			}
 		}
 	},
