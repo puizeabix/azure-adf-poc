@@ -56,6 +56,9 @@
 		"newFileInArchived_properties_typeProperties_scope": {
 			"value": "/subscriptions/6fd627f3-9600-4a99-84df-ac54922ac175/resourceGroups/POC-data-pipeline/providers/Microsoft.Storage/storageAccounts/kpwstorageaccount"
 		},
+		"default_properties_SQLServerKeyVaultSecretName_value": {
+			"value": "AzureSqlDBSecret"
+		},
 		"containerUri": {
 			"value": ""
 		},

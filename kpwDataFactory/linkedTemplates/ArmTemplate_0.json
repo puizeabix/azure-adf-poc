@@ -19,6 +19,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'SqlServer1'"
 		},
+		"default_properties_SQLServerKeyVaultSecretName_value": {
+			"type": "string",
+			"defaultValue": "AzureSqlDBSecret"
+		},
 		"AzureKeyVault_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://kpwkeyvault.vault.azure.net/"
@@ -76,6 +80,18 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/default')]",
+			"type": "Microsoft.DataFactory/factories/globalparameters",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"SQLServerKeyVaultSecretName": {
+					"type": "string",
+					"value": "[parameters('default_properties_SQLServerKeyVaultSecretName_value')]"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureKeyVault')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -228,6 +244,12 @@
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"parameters": {
+					"KeyVaultSecretName": {
+						"type": "string",
+						"defaultValue": "AzureSqlDBSecret"
+					}
+				},
 				"annotations": [],
 				"type": "AzureSqlDatabase",
 				"typeProperties": {
@@ -238,7 +260,10 @@
 							"referenceName": "AzureKeyVault",
 							"type": "LinkedServiceReference"
 						},
-						"secretName": "AzureSqlDBSecret"
+						"secretName": {
+							"value": "@linkedService().KeyVaultSecretName",
+							"type": "Expression"
+						}
 					}
 				}
 			},
@@ -321,7 +346,19 @@
 			"properties": {
 				"linkedServiceName": {
 					"referenceName": "AzureSqlDatabase1",
-					"type": "LinkedServiceReference"
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"KeyVaultSecretName": {
+							"value": "@dataset().Secret",
+							"type": "Expression"
+						}
+					}
+				},
+				"parameters": {
+					"Secret": {
+						"type": "string",
+						"defaultValue": "AzureSqlDBSecret"
+					}
 				},
 				"annotations": [],
 				"type": "AzureSqlTable",
@@ -491,7 +528,12 @@
 							{
 								"referenceName": "AzureSQLUsersTable",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"Secret": {
+										"value": "@pipeline().globalParameters.SQLServerKeyVaultSecretName",
+										"type": "Expression"
+									}
+								}
 							}
 						],
 						"outputs": [
@@ -840,60 +882,6 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/sFTPRawDataCSV')]",
 				"[concat(variables('factoryId'), '/datasets/AzureBlobArchived')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DataPipeline1')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "sFTP to Archived blob and to SQL",
-				"activities": [
-					{
-						"name": "sFTPToBlobArchived",
-						"type": "ExecutePipeline",
-						"dependsOn": [],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "sFTPToBlobArchived",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
-					},
-					{
-						"name": "ImportAzureBlobToSQL",
-						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "sFTPToBlobArchived",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "ImportAzureBlobToSQL",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/sFTPToBlobArchived')]",
-				"[concat(variables('factoryId'), '/pipelines/ImportAzureBlobToSQL')]"
 			]
 		}
 	]

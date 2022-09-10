@@ -1,1 +1,6 @@
-{}
+{
+	"SQLServerKeyVaultSecretName": {
+		"type": "string",
+		"value": "AzureSqlDBSecret"
+	}
+}

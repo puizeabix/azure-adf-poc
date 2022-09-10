@@ -74,6 +74,10 @@
 		"newFileInArchived_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/6fd627f3-9600-4a99-84df-ac54922ac175/resourceGroups/POC-data-pipeline/providers/Microsoft.Storage/storageAccounts/kpwstorageaccount"
+		},
+		"default_properties_SQLServerKeyVaultSecretName_value": {
+			"type": "string",
+			"defaultValue": "AzureSqlDBSecret"
 		}
 	},
 	"variables": {
@@ -183,7 +187,12 @@
 							{
 								"referenceName": "AzureSQLUsersTable",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"Secret": {
+										"value": "@pipeline().globalParameters.SQLServerKeyVaultSecretName",
+										"type": "Expression"
+									}
+								}
 							}
 						],
 						"outputs": [
@@ -569,7 +578,19 @@
 			"properties": {
 				"linkedServiceName": {
 					"referenceName": "AzureSqlDatabase1",
-					"type": "LinkedServiceReference"
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"KeyVaultSecretName": {
+							"value": "@dataset().Secret",
+							"type": "Expression"
+						}
+					}
+				},
+				"parameters": {
+					"Secret": {
+						"type": "string",
+						"defaultValue": "AzureSqlDBSecret"
+					}
 				},
 				"annotations": [],
 				"type": "AzureSqlTable",
@@ -762,6 +783,12 @@
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"parameters": {
+					"KeyVaultSecretName": {
+						"type": "string",
+						"defaultValue": "AzureSqlDBSecret"
+					}
+				},
 				"annotations": [],
 				"type": "AzureSqlDatabase",
 				"typeProperties": {
@@ -772,7 +799,10 @@
 							"referenceName": "AzureKeyVault",
 							"type": "LinkedServiceReference"
 						},
-						"secretName": "AzureSqlDBSecret"
+						"secretName": {
+							"value": "@linkedService().KeyVaultSecretName",
+							"type": "Expression"
+						}
 					}
 				}
 			},
@@ -928,6 +958,18 @@
 			"properties": {
 				"type": "SelfHosted",
 				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/default')]",
+			"type": "Microsoft.DataFactory/factories/globalparameters",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"SQLServerKeyVaultSecretName": {
+					"type": "string",
+					"value": "[parameters('default_properties_SQLServerKeyVaultSecretName_value')]"
+				}
 			},
 			"dependsOn": []
 		}
