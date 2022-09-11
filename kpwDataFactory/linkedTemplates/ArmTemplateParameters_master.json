@@ -62,6 +62,12 @@
 		"default_properties_SQLServerFQDN_value": {
 			"value": "kpwdb.database.windows.net"
 		},
+		"default_properties_SQLServerDBName_value": {
+			"value": "datafactory"
+		},
+		"default_properties_SQLServerUsername_value": {
+			"value": "kpwadmin"
+		},
 		"containerUri": {
 			"value": ""
 		},

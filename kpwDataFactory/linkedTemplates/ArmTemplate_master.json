@@ -83,6 +83,14 @@
 			"type": "string",
 			"defaultValue": "kpwdb.database.windows.net"
 		},
+		"default_properties_SQLServerDBName_value": {
+			"type": "string",
+			"defaultValue": "datafactory"
+		},
+		"default_properties_SQLServerUsername_value": {
+			"type": "string",
+			"defaultValue": "kpwadmin"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -124,6 +132,12 @@
 					},
 					"default_properties_SQLServerFQDN_value": {
 						"value": "[parameters('default_properties_SQLServerFQDN_value')]"
+					},
+					"default_properties_SQLServerDBName_value": {
+						"value": "[parameters('default_properties_SQLServerDBName_value')]"
+					},
+					"default_properties_SQLServerUsername_value": {
+						"value": "[parameters('default_properties_SQLServerUsername_value')]"
 					},
 					"AzureKeyVault_properties_typeProperties_baseUrl": {
 						"value": "[parameters('AzureKeyVault_properties_typeProperties_baseUrl')]"

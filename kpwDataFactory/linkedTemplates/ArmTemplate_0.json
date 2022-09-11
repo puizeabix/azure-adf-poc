@@ -27,6 +27,14 @@
 			"type": "string",
 			"defaultValue": "kpwdb.database.windows.net"
 		},
+		"default_properties_SQLServerDBName_value": {
+			"type": "string",
+			"defaultValue": "datafactory"
+		},
+		"default_properties_SQLServerUsername_value": {
+			"type": "string",
+			"defaultValue": "kpwadmin"
+		},
 		"AzureKeyVault_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://kpwkeyvault.vault.azure.net/"
@@ -96,6 +104,14 @@
 				"SQLServerFQDN": {
 					"type": "string",
 					"value": "[parameters('default_properties_SQLServerFQDN_value')]"
+				},
+				"SQLServerDBName": {
+					"type": "string",
+					"value": "[parameters('default_properties_SQLServerDBName_value')]"
+				},
+				"SQLServerUsername": {
+					"type": "string",
+					"value": "[parameters('default_properties_SQLServerUsername_value')]"
 				}
 			},
 			"dependsOn": []
@@ -260,6 +276,14 @@
 					"FQDN": {
 						"type": "string",
 						"defaultValue": "kpwdb.database.windows.net"
+					},
+					"DBName": {
+						"type": "string",
+						"defaultValue": "datafactory"
+					},
+					"Username": {
+						"type": "string",
+						"defaultValue": "kpwadmin"
 					}
 				},
 				"annotations": [],
@@ -328,6 +352,18 @@
 					"SecretName": {
 						"type": "string",
 						"defaultValue": "AzureSqlDBSecret"
+					},
+					"ServerName": {
+						"type": "string",
+						"defaultValue": "kpwdb.database.windows.net"
+					},
+					"DBName": {
+						"type": "string",
+						"defaultValue": "datafactory"
+					},
+					"Username": {
+						"type": "string",
+						"defaultValue": "kpwadmin"
 					}
 				},
 				"annotations": [],
@@ -367,6 +403,14 @@
 						"FQDN": {
 							"value": "@dataset().SQLServerFQDN",
 							"type": "Expression"
+						},
+						"DBName": {
+							"value": "@dataset().DBName",
+							"type": "Expression"
+						},
+						"Username": {
+							"value": "@dataset().Username",
+							"type": "Expression"
 						}
 					}
 				},
@@ -378,6 +422,12 @@
 					"SQLServerFQDN": {
 						"type": "string",
 						"defaultValue": "kpwdb.database.windows.net"
+					},
+					"DBName": {
+						"type": "string"
+					},
+					"Username": {
+						"type": "string"
 					}
 				},
 				"annotations": [],
@@ -556,6 +606,14 @@
 									"SQLServerFQDN": {
 										"value": "@pipeline().globalParameters.SQLServerFQDN",
 										"type": "Expression"
+									},
+									"DBName": {
+										"value": "@pipeline().globalParameters.SQLServerDBName",
+										"type": "Expression"
+									},
+									"Username": {
+										"value": "@pipeline().globalParameters.SQLServerUsername",
+										"type": "Expression"
 									}
 								}
 							}
@@ -725,6 +783,14 @@
 									},
 									"SQLServerFQDN": {
 										"value": "@pipeline().globalParameters.SQLServerFQDN",
+										"type": "Expression"
+									},
+									"DBName": {
+										"value": "@pipeline().globalParameters.SQLServerDBName",
+										"type": "Expression"
+									},
+									"Username": {
+										"value": "@pipeline().globalParameters.SQLServerUsername",
 										"type": "Expression"
 									}
 								}

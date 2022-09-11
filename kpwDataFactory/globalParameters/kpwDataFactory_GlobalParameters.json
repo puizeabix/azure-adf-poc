@@ -6,5 +6,13 @@
 	"SQLServerFQDN": {
 		"type": "string",
 		"value": "kpwdb.database.windows.net"
+	},
+	"SQLServerDBName": {
+		"type": "string",
+		"value": "datafactory"
+	},
+	"SQLServerUsername": {
+		"type": "string",
+		"value": "kpwadmin"
 	}
 }
