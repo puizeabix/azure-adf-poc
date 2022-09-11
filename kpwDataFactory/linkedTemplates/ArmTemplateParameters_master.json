@@ -11,9 +11,6 @@
 		"Sftp1_passPhrase": {
 			"value": ""
 		},
-		"SqlServer1_connectionString": {
-			"value": ""
-		},
 		"AzureBatchPOC_properties_typeProperties_batchUri": {
 			"value": "https://azuzebatchservicepoc2.eastus.batch.azure.com"
 		},

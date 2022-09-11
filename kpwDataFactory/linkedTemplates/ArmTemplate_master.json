@@ -15,10 +15,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'passPhrase' of 'Sftp1'"
 		},
-		"SqlServer1_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SqlServer1'"
-		},
 		"AzureBatchPOC_properties_typeProperties_batchUri": {
 			"type": "string",
 			"defaultValue": "https://azuzebatchservicepoc2.eastus.batch.azure.com"
@@ -123,9 +119,6 @@
 					},
 					"Sftp1_passPhrase": {
 						"value": "[parameters('Sftp1_passPhrase')]"
-					},
-					"SqlServer1_connectionString": {
-						"value": "[parameters('SqlServer1_connectionString')]"
 					},
 					"default_properties_SQLServerKeyVaultSecretName_value": {
 						"value": "[parameters('default_properties_SQLServerKeyVaultSecretName_value')]"
