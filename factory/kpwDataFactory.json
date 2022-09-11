@@ -13,6 +13,10 @@
 			"SQLServerDBName": {
 				"type": "string",
 				"value": "datafactory"
+			},
+			"SQLServerUsername": {
+				"type": "string",
+				"value": "kpwadmin"
 			}
 		}
 	},
