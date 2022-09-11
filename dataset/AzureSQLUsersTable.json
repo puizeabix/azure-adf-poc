@@ -8,6 +8,10 @@
 				"KeyVaultSecretName": {
 					"value": "@dataset().Secret",
 					"type": "Expression"
+				},
+				"FQDN": {
+					"value": "@dataset().SQLServerFQDN",
+					"type": "Expression"
 				}
 			}
 		},
@@ -15,6 +19,10 @@
 			"Secret": {
 				"type": "string",
 				"defaultValue": "AzureSqlDBSecret"
+			},
+			"SQLServerFQDN": {
+				"type": "string",
+				"defaultValue": "kpwdb.database.windows.net"
 			}
 		},
 		"annotations": [],
