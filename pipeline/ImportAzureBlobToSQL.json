@@ -132,7 +132,17 @@
 				"outputs": [
 					{
 						"referenceName": "AzureSQLUsersTable",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"Secret": {
+								"value": "@pipeline().globalParameters.SQLServerKeyVaultSecretName",
+								"type": "Expression"
+							},
+							"SQLServerFQDN": {
+								"value": "@pipeline().globalParameters.SQLServerFQDN",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
