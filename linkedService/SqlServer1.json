@@ -5,12 +5,24 @@
 			"SecretName": {
 				"type": "string",
 				"defaultValue": "AzureSqlDBSecret"
+			},
+			"ServerName": {
+				"type": "string",
+				"defaultValue": "kpwdb.database.windows.net"
+			},
+			"DBName": {
+				"type": "string",
+				"defaultValue": "datafactory"
+			},
+			"Username": {
+				"type": "string",
+				"defaultValue": "kpwadmin"
 			}
 		},
 		"annotations": [],
 		"type": "SqlServer",
 		"typeProperties": {
-			"connectionString": "Integrated Security=False;Data Source=kpwdb.database.windows.net;Initial Catalog=datafactory;User ID=kpwadmin",
+			"connectionString": "Integrated Security=False;Data Source=@{linkedService().ServerName};Initial Catalog=@{linkedService().DBName};User ID=@{linkedService().Username}",
 			"password": {
 				"type": "AzureKeyVaultSecret",
 				"store": {
