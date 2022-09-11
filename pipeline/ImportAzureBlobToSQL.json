@@ -141,6 +141,14 @@
 							"SQLServerFQDN": {
 								"value": "@pipeline().globalParameters.SQLServerFQDN",
 								"type": "Expression"
+							},
+							"DBName": {
+								"value": "@pipeline().globalParameters.SQLServerDBName",
+								"type": "Expression"
+							},
+							"Username": {
+								"value": "@pipeline().globalParameters.SQLServerUsername",
+								"type": "Expression"
 							}
 						}
 					}
