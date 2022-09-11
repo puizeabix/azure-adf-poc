@@ -49,6 +49,10 @@
 							"Secret": {
 								"value": "@pipeline().globalParameters.SQLServerKeyVaultSecretName",
 								"type": "Expression"
+							},
+							"SQLServerFQDN": {
+								"value": "@pipeline().globalParameters.SQLServerFQDN",
+								"type": "Expression"
 							}
 						}
 					}
