@@ -12,6 +12,14 @@
 				"FQDN": {
 					"value": "@dataset().SQLServerFQDN",
 					"type": "Expression"
+				},
+				"DBName": {
+					"value": "@dataset().DBName",
+					"type": "Expression"
+				},
+				"Username": {
+					"value": "@dataset().Username",
+					"type": "Expression"
 				}
 			}
 		},
@@ -23,6 +31,12 @@
 			"SQLServerFQDN": {
 				"type": "string",
 				"defaultValue": "kpwdb.database.windows.net"
+			},
+			"DBName": {
+				"type": "string"
+			},
+			"Username": {
+				"type": "string"
 			}
 		},
 		"annotations": [],
