@@ -79,6 +79,10 @@
 			"type": "string",
 			"defaultValue": "AzureSqlDBSecret"
 		},
+		"default_properties_SQLServerFQDN_value": {
+			"type": "string",
+			"defaultValue": "kpwdb.database.windows.net"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -117,6 +121,9 @@
 					},
 					"default_properties_SQLServerKeyVaultSecretName_value": {
 						"value": "[parameters('default_properties_SQLServerKeyVaultSecretName_value')]"
+					},
+					"default_properties_SQLServerFQDN_value": {
+						"value": "[parameters('default_properties_SQLServerFQDN_value')]"
 					},
 					"AzureKeyVault_properties_typeProperties_baseUrl": {
 						"value": "[parameters('AzureKeyVault_properties_typeProperties_baseUrl')]"

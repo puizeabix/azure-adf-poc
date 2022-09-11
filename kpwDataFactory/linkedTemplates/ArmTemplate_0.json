@@ -23,6 +23,10 @@
 			"type": "string",
 			"defaultValue": "AzureSqlDBSecret"
 		},
+		"default_properties_SQLServerFQDN_value": {
+			"type": "string",
+			"defaultValue": "kpwdb.database.windows.net"
+		},
 		"AzureKeyVault_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://kpwkeyvault.vault.azure.net/"
@@ -88,6 +92,10 @@
 				"SQLServerKeyVaultSecretName": {
 					"type": "string",
 					"value": "[parameters('default_properties_SQLServerKeyVaultSecretName_value')]"
+				},
+				"SQLServerFQDN": {
+					"type": "string",
+					"value": "[parameters('default_properties_SQLServerFQDN_value')]"
 				}
 			},
 			"dependsOn": []
@@ -248,6 +256,10 @@
 					"KeyVaultSecretName": {
 						"type": "string",
 						"defaultValue": "AzureSqlDBSecret"
+					},
+					"FQDN": {
+						"type": "string",
+						"defaultValue": "kpwdb.database.windows.net"
 					}
 				},
 				"annotations": [],
@@ -351,6 +363,10 @@
 						"KeyVaultSecretName": {
 							"value": "@dataset().Secret",
 							"type": "Expression"
+						},
+						"FQDN": {
+							"value": "@dataset().SQLServerFQDN",
+							"type": "Expression"
 						}
 					}
 				},
@@ -358,6 +374,10 @@
 					"Secret": {
 						"type": "string",
 						"defaultValue": "AzureSqlDBSecret"
+					},
+					"SQLServerFQDN": {
+						"type": "string",
+						"defaultValue": "kpwdb.database.windows.net"
 					}
 				},
 				"annotations": [],
@@ -532,6 +552,10 @@
 									"Secret": {
 										"value": "@pipeline().globalParameters.SQLServerKeyVaultSecretName",
 										"type": "Expression"
+									},
+									"SQLServerFQDN": {
+										"value": "@pipeline().globalParameters.SQLServerFQDN",
+										"type": "Expression"
 									}
 								}
 							}
@@ -694,7 +718,16 @@
 							{
 								"referenceName": "AzureSQLUsersTable",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"Secret": {
+										"value": "@pipeline().globalParameters.SQLServerKeyVaultSecretName",
+										"type": "Expression"
+									},
+									"SQLServerFQDN": {
+										"value": "@pipeline().globalParameters.SQLServerFQDN",
+										"type": "Expression"
+									}
+								}
 							}
 						]
 					}

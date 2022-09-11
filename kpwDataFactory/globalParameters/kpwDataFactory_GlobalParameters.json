@@ -2,5 +2,9 @@
 	"SQLServerKeyVaultSecretName": {
 		"type": "string",
 		"value": "AzureSqlDBSecret"
+	},
+	"SQLServerFQDN": {
+		"type": "string",
+		"value": "kpwdb.database.windows.net"
 	}
 }

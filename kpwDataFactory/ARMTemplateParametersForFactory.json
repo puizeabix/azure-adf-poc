@@ -58,6 +58,9 @@
 		},
 		"default_properties_SQLServerKeyVaultSecretName_value": {
 			"value": "AzureSqlDBSecret"
+		},
+		"default_properties_SQLServerFQDN_value": {
+			"value": "kpwdb.database.windows.net"
 		}
 	}
 }
