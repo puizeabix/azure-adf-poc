@@ -9,12 +9,20 @@
 			"FQDN": {
 				"type": "string",
 				"defaultValue": "kpwdb.database.windows.net"
+			},
+			"DBName": {
+				"type": "string",
+				"defaultValue": "datafactory"
+			},
+			"Username": {
+				"type": "string",
+				"defaultValue": "kpwadmin"
 			}
 		},
 		"annotations": [],
 		"type": "AzureSqlDatabase",
 		"typeProperties": {
-			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=@{linkedService().FQDN};Initial Catalog=datafactory;User ID=kpwadmin",
+			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=@{linkedService().FQDN};Initial Catalog=@{linkedService().DBName};User ID=@{linkedService().Username}",
 			"password": {
 				"type": "AzureKeyVaultSecret",
 				"store": {
