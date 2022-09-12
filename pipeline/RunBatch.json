@@ -76,20 +76,6 @@
 				}
 			}
 		],
-		"parameters": {
-			"acrregistry": {
-				"type": "string",
-				"defaultValue": "azurebatchpoc.azurecr.io"
-			},
-			"acrusername": {
-				"type": "string",
-				"defaultValue": "azurebatchpoc"
-			},
-			"acrpassword": {
-				"type": "string",
-				"defaultValue": "pNu+lsaSDa7D6ga3gkSNLSYNE4Xunhh4"
-			}
-		},
 		"annotations": [],
 		"lastPublishTime": "2022-09-01T14:14:09Z"
 	},
