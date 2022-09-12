@@ -95,7 +95,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"url": "https://kpwkeyvault.vault.azure.net/secrets/adminUsername/2158ff6d08c840e7b363a0ee2f165702",
+					"url": "https://kpwkeyvault.vault.azure.net/secrets/adminUsername/2158ff6d08c840e7b363a0ee2f165702?api-version=7.0",
 					"method": "GET",
 					"linkedServices": [
 						{
