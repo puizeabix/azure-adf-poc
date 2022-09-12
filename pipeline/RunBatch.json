@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"command": {
-						"value": "@concat('/bin/bash -c \"docker login ', pipeline().parameters.acrregistry, ' --username ', pipeline().parameters.acrusername, ' --password ', pipeline().parameters.acrpassword, ' && docker run -v $(pwd)/activity.json:/activity.json azurebatchpoc.azurecr.io/pocbatch:latest\"')",
+						"value": "@concat('/bin/bash -c \\\"docker login ', pipeline().parameters.acrregistry, ' --username ', pipeline().parameters.acrusername, ' --password ', pipeline().parameters.acrpassword, ' && docker run -v $(pwd)/activity.json:/activity.json azurebatchpoc.azurecr.io/pocbatch:latest\\\"')",
 						"type": "Expression"
 					},
 					"resourceLinkedService": {
