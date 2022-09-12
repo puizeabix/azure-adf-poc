@@ -57,7 +57,25 @@
 							},
 							{
 								"referenceName": "AzureSQLUsersTable",
-								"type": "DatasetReference"
+								"type": "DatasetReference",
+								"parameters": {
+									"Secret": {
+										"value": "@pipeline().globalParameters.SQLServerKeyVaultSecretName",
+										"type": "Expression"
+									},
+									"SQLServerFQDN": {
+										"value": "@pipeline().globalParameters.SQLServerFQDN",
+										"type": "Expression"
+									},
+									"DBName": {
+										"value": "@pipeline().globalParameters.SQLServerDBName",
+										"type": "Expression"
+									},
+									"Username": {
+										"value": "@pipeline().globalParameters.SQLServerUsername",
+										"type": "Expression"
+									}
+								}
 							}
 						]
 					}
