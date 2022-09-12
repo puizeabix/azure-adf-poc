@@ -15,7 +15,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"command": "/bin/bash -c \"docker run azurebatchpoc.azurecr.io/batchapp_exit1 --mount type=bind,source=\"$(pwd)\"/activity.json=/activity.json,readonly\"",
+					"command": "/bin/bash -c \"docker run -v $(pwd)/activity.json:/activity.json -e EXIT=1 azurebatchpoc.azurecr.io/pocbatch:latest\"",
 					"resourceLinkedService": {
 						"referenceName": "AzureBlobBatch",
 						"type": "LinkedServiceReference"
@@ -27,22 +27,10 @@
 								"referenceName": "AzureSqlDatabase1",
 								"type": "LinkedServiceReference",
 								"parameters": {
-									"KeyVaultSecretName": {
-										"value": "@pipeline().globalParameters.SQLServerKeyVaultSecretName",
-										"type": "Expression"
-									},
-									"FQDN": {
-										"value": "@pipeline().globalParameters.SQLServerFQDN",
-										"type": "Expression"
-									},
-									"DBName": {
-										"value": "@pipeline().globalParameters.SQLServerDBName",
-										"type": "Expression"
-									},
-									"Username": {
-										"value": "@pipeline().globalParameters.SQLServerUsername",
-										"type": "Expression"
-									}
+									"KeyVaultSecretName": "AzureSqlDBSecret",
+									"FQDN": "kpwdb.database.windows.net",
+									"DBName": "datafactory",
+									"Username": "kpwadmin"
 								}
 							},
 							{
