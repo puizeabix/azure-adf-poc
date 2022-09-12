@@ -780,7 +780,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"command": "/bin/bash -c \"docker run -v $(pwd)/activity.json:/activity.json azurebatchpoc.azurecr.io/batchapp4\"",
+							"command": "/bin/bash -c \"docker run -v $(pwd)/activity.json:/activity.json azurebatchpoc.azurecr.io/pocbatch:latest\"",
 							"resourceLinkedService": {
 								"referenceName": "AzureBlobBatch",
 								"type": "LinkedServiceReference"
