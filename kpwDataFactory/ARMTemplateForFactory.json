@@ -407,7 +407,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Run Python')]",
+			"name": "[concat(parameters('factoryName'), '/RunBatch')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -425,7 +425,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"command": "/bin/bash -c \"docker run azurebatchpoc.azurecr.io/batchapp_exit1\"",
+							"command": "/bin/bash -c \"docker run azurebatchpoc.azurecr.io/batchapp --mount type=bind,source=\"$(pwd)\"/activity.json=/activity.json,readonly\"",
 							"resourceLinkedService": {
 								"referenceName": "AzureBlobBatch",
 								"type": "LinkedServiceReference"
@@ -436,7 +436,12 @@
 									{
 										"referenceName": "AzureSqlDatabase1",
 										"type": "LinkedServiceReference",
-										"parameters": {}
+										"parameters": {
+											"KeyVaultSecretName": "AzureSqlDBSecret",
+											"FQDN": "kpwdb.database.windows.net",
+											"DBName": "datafactory",
+											"Username": "kpwadmin"
+										}
 									},
 									{
 										"referenceName": "Sftp1",
@@ -999,6 +1004,103 @@
 				"typeProperties": {}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/RunBatchFailed')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "testPipeline",
+						"type": "Custom",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"command": "/bin/bash -c \"docker run azurebatchpoc.azurecr.io/batchapp_exit1 --mount type=bind,source=\"$(pwd)\"/activity.json=/activity.json,readonly\"",
+							"resourceLinkedService": {
+								"referenceName": "AzureBlobBatch",
+								"type": "LinkedServiceReference"
+							},
+							"folderPath": "input",
+							"referenceObjects": {
+								"linkedServices": [
+									{
+										"referenceName": "AzureSqlDatabase1",
+										"type": "LinkedServiceReference",
+										"parameters": {
+											"KeyVaultSecretName": "AzureSqlDBSecret",
+											"FQDN": "kpwdb.database.windows.net",
+											"DBName": "datafactory",
+											"Username": "kpwadmin"
+										}
+									},
+									{
+										"referenceName": "Sftp1",
+										"type": "LinkedServiceReference",
+										"parameters": {}
+									},
+									{
+										"referenceName": "export_blob",
+										"type": "LinkedServiceReference",
+										"parameters": {}
+									},
+									{
+										"referenceName": "archive_blob",
+										"type": "LinkedServiceReference",
+										"parameters": {}
+									}
+								],
+								"datasets": [
+									{
+										"referenceName": "sFTPRawDataCSV",
+										"type": "DatasetReference",
+										"parameters": {}
+									},
+									{
+										"referenceName": "AzureBlobArchived",
+										"type": "DatasetReference",
+										"parameters": {}
+									},
+									{
+										"referenceName": "AzureSQLUsersTable",
+										"type": "DatasetReference",
+										"parameters": {}
+									}
+								]
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureBatchPOC",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-09-01T14:14:09Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]",
+				"[concat(variables('factoryId'), '/linkedServices/Sftp1')]",
+				"[concat(variables('factoryId'), '/linkedServices/export_blob')]",
+				"[concat(variables('factoryId'), '/linkedServices/archive_blob')]",
+				"[concat(variables('factoryId'), '/datasets/sFTPRawDataCSV')]",
+				"[concat(variables('factoryId'), '/datasets/AzureBlobArchived')]",
+				"[concat(variables('factoryId'), '/datasets/AzureSQLUsersTable')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobBatch')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureBatchPOC')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/default')]",
