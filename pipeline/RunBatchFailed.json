@@ -27,10 +27,22 @@
 								"referenceName": "AzureSqlDatabase1",
 								"type": "LinkedServiceReference",
 								"parameters": {
-									"KeyVaultSecretName": "AzureSqlDBSecret",
-									"FQDN": "kpwdb.database.windows.net",
-									"DBName": "datafactory",
-									"Username": "kpwadmin"
+									"KeyVaultSecretName": {
+										"value": "@pipeline().globalParameters.SQLServerKeyVaultSecretName",
+										"type": "Expression"
+									},
+									"FQDN": {
+										"value": "@pipeline().globalParameters.SQLServerFQDN",
+										"type": "Expression"
+									},
+									"DBName": {
+										"value": "@pipeline().globalParameters.SQLServerDBName",
+										"type": "Expression"
+									},
+									"Username": {
+										"value": "@pipeline().globalParameters.SQLServerUsername",
+										"type": "Expression"
+									}
 								}
 							},
 							{
