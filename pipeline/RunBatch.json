@@ -1,5 +1,5 @@
 {
-	"name": "Run Python",
+	"name": "RunBatch",
 	"properties": {
 		"activities": [
 			{
@@ -15,7 +15,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"command": "/bin/bash -c \"docker run azurebatchpoc.azurecr.io/batchapp_exit1\"",
+					"command": "/bin/bash -c \"docker run azurebatchpoc.azurecr.io/batchapp --mount type=bind,source=\"$(pwd)\"/activity.json=/activity.json,readonly\"",
 					"resourceLinkedService": {
 						"referenceName": "AzureBlobBatch",
 						"type": "LinkedServiceReference"
@@ -25,7 +25,13 @@
 						"linkedServices": [
 							{
 								"referenceName": "AzureSqlDatabase1",
-								"type": "LinkedServiceReference"
+								"type": "LinkedServiceReference",
+								"parameters": {
+									"KeyVaultSecretName": "AzureSqlDBSecret",
+									"FQDN": "kpwdb.database.windows.net",
+									"DBName": "datafactory",
+									"Username": "kpwadmin"
+								}
 							},
 							{
 								"referenceName": "Sftp1",
