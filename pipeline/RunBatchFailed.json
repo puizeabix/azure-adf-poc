@@ -24,16 +24,6 @@
 					"referenceObjects": {
 						"linkedServices": [
 							{
-								"referenceName": "AzureSqlDatabase1",
-								"type": "LinkedServiceReference",
-								"parameters": {
-									"KeyVaultSecretName": "AzureSqlDBSecret",
-									"FQDN": "kpwdb.database.windows.net",
-									"DBName": "datafactory",
-									"Username": "kpwadmin"
-								}
-							},
-							{
 								"referenceName": "Sftp1",
 								"type": "LinkedServiceReference"
 							},
@@ -59,14 +49,8 @@
 								"referenceName": "AzureSQLUsersTable",
 								"type": "DatasetReference",
 								"parameters": {
-									"Secret": {
-										"value": "@pipeline().globalParameters.SQLServerKeyVaultSecretName",
-										"type": "Expression"
-									},
-									"SQLServerFQDN": {
-										"value": "@pipeline().globalParameters.SQLServerFQDN",
-										"type": "Expression"
-									},
+									"Secret": "AzureSqlDBSecret",
+									"SQLServerFQDN": "kpwdb.database.windows.net",
 									"DBName": {
 										"value": "@pipeline().globalParameters.SQLServerDBName",
 										"type": "Expression"
