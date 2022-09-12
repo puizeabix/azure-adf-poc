@@ -1039,16 +1039,6 @@
 							"referenceObjects": {
 								"linkedServices": [
 									{
-										"referenceName": "AzureSqlDatabase1",
-										"type": "LinkedServiceReference",
-										"parameters": {
-											"KeyVaultSecretName": "AzureSqlDBSecret",
-											"FQDN": "kpwdb.database.windows.net",
-											"DBName": "datafactory",
-											"Username": "kpwadmin"
-										}
-									},
-									{
 										"referenceName": "Sftp1",
 										"type": "LinkedServiceReference",
 										"parameters": {}
@@ -1078,7 +1068,18 @@
 									{
 										"referenceName": "AzureSQLUsersTable",
 										"type": "DatasetReference",
-										"parameters": {}
+										"parameters": {
+											"Secret": "AzureSqlDBSecret",
+											"SQLServerFQDN": "kpwdb.database.windows.net",
+											"DBName": {
+												"value": "@pipeline().globalParameters.SQLServerDBName",
+												"type": "Expression"
+											},
+											"Username": {
+												"value": "@pipeline().globalParameters.SQLServerUsername",
+												"type": "Expression"
+											}
+										}
 									}
 								]
 							}
@@ -1097,7 +1098,6 @@
 				"lastPublishTime": "2022-09-01T14:14:09Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]",
 				"[concat(variables('factoryId'), '/linkedServices/Sftp1')]",
 				"[concat(variables('factoryId'), '/linkedServices/export_blob')]",
 				"[concat(variables('factoryId'), '/linkedServices/archive_blob')]",
