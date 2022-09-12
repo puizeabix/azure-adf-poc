@@ -24,28 +24,6 @@
 					"referenceObjects": {
 						"linkedServices": [
 							{
-								"referenceName": "AzureSqlDatabase1",
-								"type": "LinkedServiceReference",
-								"parameters": {
-									"KeyVaultSecretName": {
-										"value": "@pipeline().globalParameters.SQLServerKeyVaultSecretName",
-										"type": "Expression"
-									},
-									"FQDN": {
-										"value": "@pipeline().globalParameters.SQLServerFQDN",
-										"type": "Expression"
-									},
-									"DBName": {
-										"value": "@pipeline().globalParameters.SQLServerDBName",
-										"type": "Expression"
-									},
-									"Username": {
-										"value": "@pipeline().globalParameters.SQLServerUsername",
-										"type": "Expression"
-									}
-								}
-							},
-							{
 								"referenceName": "Sftp1",
 								"type": "LinkedServiceReference"
 							},
@@ -69,7 +47,25 @@
 							},
 							{
 								"referenceName": "AzureSQLUsersTable",
-								"type": "DatasetReference"
+								"type": "DatasetReference",
+								"parameters": {
+									"Secret": {
+										"value": "@pipeline().globalParameters.SQLServerKeyVaultSecretName",
+										"type": "Expression"
+									},
+									"SQLServerFQDN": {
+										"value": "@pipeline().globalParameters.SQLServerFQDN",
+										"type": "Expression"
+									},
+									"DBName": {
+										"value": "@pipeline().globalParameters.SQLServerDBName",
+										"type": "Expression"
+									},
+									"Username": {
+										"value": "@pipeline().globalParameters.SQLServerUsername",
+										"type": "Expression"
+									}
+								}
 							}
 						]
 					}
