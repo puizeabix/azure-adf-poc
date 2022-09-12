@@ -425,10 +425,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"command": {
-								"value": "@concat('/bin/bash -c \\\"docker login ', pipeline().parameters.acrregistry, ' --username ', pipeline().parameters.acrusername, ' --password ', pipeline().parameters.acrpassword, ' && docker run -v $(pwd)/activity.json:/activity.json azurebatchpoc.azurecr.io/pocbatch:latest\\\"')",
-								"type": "Expression"
-							},
+							"command": "/bin/bash -c \"docker login azurebatchpoc.azurecr.io --username azurebatchpoc --password pNu+lsaSDa7D6ga3gkSNLSYNE4Xunhh4 && docker run -v $(pwd)/activity.json:/activity.json azurebatchpoc.azurecr.io/pocbatch:latest\"",
 							"resourceLinkedService": {
 								"referenceName": "AzureBlobBatch",
 								"type": "LinkedServiceReference"
