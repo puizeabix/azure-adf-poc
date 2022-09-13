@@ -15,7 +15,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"command": "/bin/bash -c \"docker login azurebatchpoc.azurecr.io --username azurebatchpoc --password pNu+lsaSDa7D6ga3gkSNLSYNE4Xunhh4 && docker run -v $(pwd)/activity.json:/activity.json -e EXIT=1 azurebatchpoc.azurecr.io/pocbatch:latest\"",
+					"command": "/bin/bash -c \"docker login azurebatchpoc.azurecr.io --username azurebatchpoc --password pNu+lsaSDa7D6ga3gkSNLSYNE4Xunhh4 && docker run -v $(pwd)/activity.json:/activity.json -e EXIT=1 azurebatchpoc.azurecr.io/securebatch:latest\"",
 					"resourceLinkedService": {
 						"referenceName": "AzureBlobBatch",
 						"type": "LinkedServiceReference"
