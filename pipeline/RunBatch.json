@@ -46,10 +46,6 @@
 					"referenceObjects": {
 						"linkedServices": [
 							{
-								"referenceName": "Sftp1",
-								"type": "LinkedServiceReference"
-							},
-							{
 								"referenceName": "export_blob",
 								"type": "LinkedServiceReference"
 							},
@@ -60,10 +56,6 @@
 						],
 						"datasets": [
 							{
-								"referenceName": "sFTPRawDataCSV",
-								"type": "DatasetReference"
-							},
-							{
 								"referenceName": "AzureBlobArchived",
 								"type": "DatasetReference"
 							},
@@ -71,22 +63,8 @@
 								"referenceName": "AzureSQLUsersTable",
 								"type": "DatasetReference",
 								"parameters": {
-									"Secret": {
-										"value": "@pipeline().globalParameters.SQLServerKeyVaultSecretName",
-										"type": "Expression"
-									},
-									"SQLServerFQDN": {
-										"value": "@pipeline().globalParameters.SQLServerFQDN",
-										"type": "Expression"
-									},
-									"DBName": {
-										"value": "@pipeline().globalParameters.SQLServerDBName",
-										"type": "Expression"
-									},
-									"Username": {
-										"value": "@pipeline().globalParameters.SQLServerUsername",
-										"type": "Expression"
-									}
+									"Secret": "AzureSqlDBSecret",
+									"SQLServerFQDN": "kpwdb.database.windows.net"
 								}
 							}
 						]
