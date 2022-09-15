@@ -837,14 +837,6 @@
 										"referenceName": "AzureBlobArchived",
 										"type": "DatasetReference",
 										"parameters": {}
-									},
-									{
-										"referenceName": "AzureSQLUsersTable",
-										"type": "DatasetReference",
-										"parameters": {
-											"Secret": "AzureSqlDBSecret",
-											"SQLServerFQDN": "kpwdb.database.windows.net"
-										}
 									}
 								]
 							}
@@ -938,7 +930,6 @@
 				"[concat(variables('factoryId'), '/linkedServices/export_blob')]",
 				"[concat(variables('factoryId'), '/linkedServices/archive_blob')]",
 				"[concat(variables('factoryId'), '/datasets/AzureBlobArchived')]",
-				"[concat(variables('factoryId'), '/datasets/AzureSQLUsersTable')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobBatch')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureBatchPOC')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault')]"
