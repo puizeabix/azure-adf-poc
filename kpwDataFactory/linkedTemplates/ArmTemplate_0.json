@@ -31,6 +31,22 @@
 			"type": "string",
 			"defaultValue": "kpwadmin"
 		},
+		"default_properties_DockerUsernameKVName_value": {
+			"type": "string",
+			"defaultValue": "docker-username"
+		},
+		"default_properties_DockerHostKVName_value": {
+			"type": "string",
+			"defaultValue": "docker-host"
+		},
+		"default_properties_DockerPasswordKVName_value": {
+			"type": "string",
+			"defaultValue": "docker-password"
+		},
+		"default_properties_SFTPUsernameKVName_value": {
+			"type": "string",
+			"defaultValue": "sftp-username"
+		},
 		"AzureKeyVault_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://kpwkeyvault.vault.azure.net/"
@@ -108,6 +124,22 @@
 				"SQLServerUsername": {
 					"type": "string",
 					"value": "[parameters('default_properties_SQLServerUsername_value')]"
+				},
+				"DockerUsernameKVName": {
+					"type": "string",
+					"value": "[parameters('default_properties_DockerUsernameKVName_value')]"
+				},
+				"DockerHostKVName": {
+					"type": "string",
+					"value": "[parameters('default_properties_DockerHostKVName_value')]"
+				},
+				"DockerPasswordKVName": {
+					"type": "string",
+					"value": "[parameters('default_properties_DockerPasswordKVName_value')]"
+				},
+				"SFTPUsernameKVName": {
+					"type": "string",
+					"value": "[parameters('default_properties_SFTPUsernameKVName_value')]"
 				}
 			},
 			"dependsOn": []
@@ -864,7 +896,10 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"url": "https://kpwkeyvault.vault.azure.net/secrets/docker-username?api-version=2016-10-01",
+							"url": {
+								"value": "@concat('https://kpwkeyvault.vault.azure.net/secrets/', pipeline().globalParameters.DockerUsernameKVName, '?api-version=2016-10-01')",
+								"type": "Expression"
+							},
 							"method": "GET",
 							"headers": {},
 							"linkedServices": [
@@ -892,7 +927,10 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"url": "https://kpwkeyvault.vault.azure.net/secrets/docker-host/19adc1724e824c328a856ecf8e013f18?api-version=7.0",
+							"url": {
+								"value": "@concat('https://kpwkeyvault.vault.azure.net/secrets/', pipeline().globalParameters.DockerHostKVName, '?api-version=2016-10-01')",
+								"type": "Expression"
+							},
 							"method": "GET",
 							"headers": {},
 							"authentication": {
@@ -914,7 +952,10 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"url": "https://kpwkeyvault.vault.azure.net/secrets/docker-password/738d9f733df345248ae6ba4622325570?api-version=7.0",
+							"url": {
+								"value": "@concat('https://kpwkeyvault.vault.azure.net/secrets/', pipeline().globalParameters.DockerPasswordKVName,'?api-version=2016-10-01')",
+								"type": "Expression"
+							},
 							"method": "GET",
 							"headers": {},
 							"authentication": {
@@ -1131,7 +1172,10 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"url": "https://kpwkeyvault.vault.azure.net/secrets/sftp-username/fcd26ba866cd4597a9606e43960d9d98?api-version=7.0",
+							"url": {
+								"value": "@concat('https://kpwkeyvault.vault.azure.net/secrets/', pipeline().globalParameters.SFTPUsernameKVName, '?api-version=2016-10-01')",
+								"type": "Expression"
+							},
 							"method": "GET",
 							"headers": {},
 							"authentication": {

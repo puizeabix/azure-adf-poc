@@ -87,6 +87,22 @@
 			"type": "string",
 			"defaultValue": "kpwadmin"
 		},
+		"default_properties_DockerUsernameKVName_value": {
+			"type": "string",
+			"defaultValue": "docker-username"
+		},
+		"default_properties_DockerHostKVName_value": {
+			"type": "string",
+			"defaultValue": "docker-host"
+		},
+		"default_properties_DockerPasswordKVName_value": {
+			"type": "string",
+			"defaultValue": "docker-password"
+		},
+		"default_properties_SFTPUsernameKVName_value": {
+			"type": "string",
+			"defaultValue": "sftp-username"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -131,6 +147,18 @@
 					},
 					"default_properties_SQLServerUsername_value": {
 						"value": "[parameters('default_properties_SQLServerUsername_value')]"
+					},
+					"default_properties_DockerUsernameKVName_value": {
+						"value": "[parameters('default_properties_DockerUsernameKVName_value')]"
+					},
+					"default_properties_DockerHostKVName_value": {
+						"value": "[parameters('default_properties_DockerHostKVName_value')]"
+					},
+					"default_properties_DockerPasswordKVName_value": {
+						"value": "[parameters('default_properties_DockerPasswordKVName_value')]"
+					},
+					"default_properties_SFTPUsernameKVName_value": {
+						"value": "[parameters('default_properties_SFTPUsernameKVName_value')]"
 					},
 					"AzureKeyVault_properties_typeProperties_baseUrl": {
 						"value": "[parameters('AzureKeyVault_properties_typeProperties_baseUrl')]"

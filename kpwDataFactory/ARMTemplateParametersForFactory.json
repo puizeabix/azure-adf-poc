@@ -64,6 +64,18 @@
 		},
 		"default_properties_SQLServerUsername_value": {
 			"value": "kpwadmin"
+		},
+		"default_properties_DockerUsernameKVName_value": {
+			"value": "docker-username"
+		},
+		"default_properties_DockerHostKVName_value": {
+			"value": "docker-host"
+		},
+		"default_properties_DockerPasswordKVName_value": {
+			"value": "docker-password"
+		},
+		"default_properties_SFTPUsernameKVName_value": {
+			"value": "sftp-username"
 		}
 	}
 }

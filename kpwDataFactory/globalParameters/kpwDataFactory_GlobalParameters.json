@@ -14,5 +14,21 @@
 	"SQLServerUsername": {
 		"type": "string",
 		"value": "kpwadmin"
+	},
+	"DockerUsernameKVName": {
+		"type": "string",
+		"value": "docker-username"
+	},
+	"DockerHostKVName": {
+		"type": "string",
+		"value": "docker-host"
+	},
+	"DockerPasswordKVName": {
+		"type": "string",
+		"value": "docker-password"
+	},
+	"SFTPUsernameKVName": {
+		"type": "string",
+		"value": "sftp-username"
 	}
 }
