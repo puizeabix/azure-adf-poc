@@ -1,7 +1,11 @@
 {
 	"name": "Sftp1",
-	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
+		"parameters": {
+			"sftpUser": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "Sftp",
 		"typeProperties": {
@@ -23,5 +27,6 @@
 			"referenceName": "integrationRuntime1",
 			"type": "IntegrationRuntimeReference"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/linkedservices"
 }
