@@ -29,6 +29,10 @@
 			"DockerPasswordKVName": {
 				"type": "string",
 				"value": "docker-password"
+			},
+			"SFTPUsernameKVName": {
+				"type": "string",
+				"value": "sftp-username"
 			}
 		}
 	},
