@@ -421,6 +421,18 @@
 								"dependencyConditions": [
 									"Succeeded"
 								]
+							},
+							{
+								"activity": "GetDockerHost",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "GetDockerPassword",
+								"dependencyConditions": [
+									"Succeeded"
+								]
 							}
 						],
 						"policy": {
@@ -433,7 +445,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"command": {
-								"value": "@concat('/bin/bash -c \"docker login azurebatchpoc.azurecr.io --username ', activity('GetDockerUser').output.value , ' --password pNu+lsaSDa7D6ga3gkSNLSYNE4Xunhh4')",
+								"value": "@concat('/bin/bash -c \"docker login ', activity('GetDockerHost').output.value, ' --username ', activity('GetDockerUser').output.value , ' --password ', activity('GetDockerPassword').output.value)",
 								"type": "Expression"
 							},
 							"resourceLinkedService": {
@@ -522,6 +534,50 @@
 									"type": "LinkedServiceReference"
 								}
 							],
+							"authentication": {
+								"type": "MSI",
+								"resource": "https://vault.azure.net"
+							}
+						}
+					},
+					{
+						"name": "GetDockerHost",
+						"type": "WebActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://kpwkeyvault.vault.azure.net/secrets/docker-host/19adc1724e824c328a856ecf8e013f18?api-version=7.0",
+							"method": "GET",
+							"headers": {},
+							"authentication": {
+								"type": "MSI",
+								"resource": "https://vault.azure.net"
+							}
+						}
+					},
+					{
+						"name": "GetDockerPassword",
+						"type": "WebActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://kpwkeyvault.vault.azure.net/secrets/docker-password/738d9f733df345248ae6ba4622325570?api-version=7.0",
+							"method": "GET",
+							"headers": {},
 							"authentication": {
 								"type": "MSI",
 								"resource": "https://vault.azure.net"
