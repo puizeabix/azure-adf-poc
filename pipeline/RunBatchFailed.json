@@ -5,7 +5,26 @@
 			{
 				"name": "testPipeline",
 				"type": "Custom",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "GetDockerUser",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "GetDockerHost",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "GetDockerPassword",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -15,7 +34,10 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"command": "/bin/bash -c \"docker login azurebatchpoc.azurecr.io --username azurebatchpoc --password pNu+lsaSDa7D6ga3gkSNLSYNE4Xunhh4 && docker run -v $(pwd)/activity.json:/activity.json -e EXIT=1 azurebatchpoc.azurecr.io/securebatch:latest\"",
+					"command": {
+						"value": "@concat('/bin/bash -c \"docker login ', activity('GetDockerHost').output.value, ' --username ', activity('GetDockerUser').output.value , ' --password ', activity('GetDockerPassword').output.value, ' && docker run -v $(pwd)/activity.json:/activity.json -e EXIT=1 azurebatchpoc.azurecr.io/pocbatch:latest\"')",
+						"type": "Expression"
+					},
 					"resourceLinkedService": {
 						"referenceName": "AzureBlobBatch",
 						"type": "LinkedServiceReference"
@@ -67,6 +89,84 @@
 				"linkedServiceName": {
 					"referenceName": "AzureBatchPOC",
 					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "GetDockerUser",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": true,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@concat('https://kpwkeyvault.vault.azure.net/secrets/', pipeline().globalParameters.DockerUsernameKVName, '?api-version=2016-10-01')",
+						"type": "Expression"
+					},
+					"method": "GET",
+					"linkedServices": [
+						{
+							"referenceName": "AzureKeyVault",
+							"type": "LinkedServiceReference"
+						}
+					],
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://vault.azure.net"
+					}
+				}
+			},
+			{
+				"name": "GetDockerHost",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": true,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@concat('https://kpwkeyvault.vault.azure.net/secrets/', pipeline().globalParameters.DockerHostKVName, '?api-version=2016-10-01')",
+						"type": "Expression"
+					},
+					"method": "GET",
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://vault.azure.net"
+					}
+				}
+			},
+			{
+				"name": "GetDockerPassword",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": true,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@concat('https://kpwkeyvault.vault.azure.net/secrets/', pipeline().globalParameters.DockerPasswordKVName,'?api-version=2016-10-01')",
+						"type": "Expression"
+					},
+					"method": "GET",
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://vault.azure.net"
+					}
 				}
 			}
 		],
