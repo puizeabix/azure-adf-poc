@@ -21,7 +21,7 @@
 		},
 		"AzureBatchPOC_properties_typeProperties_poolName": {
 			"type": "string",
-			"defaultValue": "pool3"
+			"defaultValue": "pool_fixed_ip_mi"
 		},
 		"AzureBatchPOC_properties_typeProperties_accountName": {
 			"type": "string",
@@ -440,7 +440,7 @@
 							"retry": 0,
 							"retryIntervalInSeconds": 30,
 							"secureOutput": false,
-							"secureInput": false
+							"secureInput": true
 						},
 						"userProperties": [],
 						"typeProperties": {
@@ -520,7 +520,7 @@
 							"timeout": "0.12:00:00",
 							"retry": 0,
 							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
+							"secureOutput": true,
 							"secureInput": false
 						},
 						"userProperties": [],
@@ -548,7 +548,7 @@
 							"timeout": "0.12:00:00",
 							"retry": 0,
 							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
+							"secureOutput": true,
 							"secureInput": false
 						},
 						"userProperties": [],
@@ -570,7 +570,7 @@
 							"timeout": "0.12:00:00",
 							"retry": 0,
 							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
+							"secureOutput": true,
 							"secureInput": false
 						},
 						"userProperties": [],
@@ -711,13 +711,20 @@
 					{
 						"name": "CopySFTPToBlob",
 						"type": "Copy",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "GetSFTPUsername",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"policy": {
 							"timeout": "0.12:00:00",
 							"retry": 0,
 							"retryIntervalInSeconds": 30,
 							"secureOutput": false,
-							"secureInput": false
+							"secureInput": true
 						},
 						"userProperties": [],
 						"typeProperties": {
@@ -759,7 +766,12 @@
 							{
 								"referenceName": "sFTPRawDataCSV",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"sftpUser": {
+										"value": "@activity('GetSFTPUsername').output.value",
+										"type": "Expression"
+									}
+								}
 							}
 						],
 						"outputs": [
@@ -769,6 +781,28 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "GetSFTPUsername",
+						"type": "WebActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": true,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://kpwkeyvault.vault.azure.net/secrets/sftp-username/fcd26ba866cd4597a9606e43960d9d98?api-version=7.0",
+							"method": "GET",
+							"headers": {},
+							"authentication": {
+								"type": "MSI",
+								"resource": "https://vault.azure.net"
+							}
+						}
 					}
 				],
 				"policy": {
@@ -931,7 +965,13 @@
 			"properties": {
 				"linkedServiceName": {
 					"referenceName": "Sftp1",
-					"type": "LinkedServiceReference"
+					"type": "LinkedServiceReference",
+					"parameters": {}
+				},
+				"parameters": {
+					"sftpUser": {
+						"type": "string"
+					}
 				},
 				"annotations": [],
 				"type": "DelimitedText",
@@ -1089,6 +1129,11 @@
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"parameters": {
+					"sftpUser": {
+						"type": "string"
+					}
+				},
 				"annotations": [],
 				"type": "Sftp",
 				"typeProperties": {

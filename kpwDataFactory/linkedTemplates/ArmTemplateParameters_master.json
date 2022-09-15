@@ -15,7 +15,7 @@
 			"value": "https://azuzebatchservicepoc2.eastus.batch.azure.com"
 		},
 		"AzureBatchPOC_properties_typeProperties_poolName": {
-			"value": "pool3"
+			"value": "pool_fixed_ip_mi"
 		},
 		"AzureBatchPOC_properties_typeProperties_accountName": {
 			"value": "azuzebatchservicepoc2"

@@ -21,7 +21,7 @@
 		},
 		"AzureBatchPOC_properties_typeProperties_poolName": {
 			"type": "string",
-			"defaultValue": "pool3"
+			"defaultValue": "pool_fixed_ip_mi"
 		},
 		"AzureBatchPOC_properties_typeProperties_accountName": {
 			"type": "string",
