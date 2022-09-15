@@ -864,7 +864,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"url": "https://kpwkeyvault.vault.azure.net/secrets/docker-password?api-version=2016-10-01",
+							"url": "https://kpwkeyvault.vault.azure.net/secrets/docker-username?api-version=2016-10-01",
 							"method": "GET",
 							"headers": {},
 							"linkedServices": [
@@ -909,7 +909,7 @@
 							"timeout": "0.12:00:00",
 							"retry": 0,
 							"retryIntervalInSeconds": 30,
-							"secureOutput": true,
+							"secureOutput": false,
 							"secureInput": false
 						},
 						"userProperties": [],
