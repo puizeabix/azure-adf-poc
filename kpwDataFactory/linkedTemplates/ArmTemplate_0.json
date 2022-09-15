@@ -859,12 +859,12 @@
 							"timeout": "0.12:00:00",
 							"retry": 0,
 							"retryIntervalInSeconds": 30,
-							"secureOutput": true,
+							"secureOutput": false,
 							"secureInput": false
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"url": "https://kpwkeyvault.vault.azure.net/secrets/docker-username/7bb2bead29a44336b7f34ad8ecd3cf49?api-version=7.0",
+							"url": "https://kpwkeyvault.vault.azure.net/secrets/docker-password?api-version=2016-10-01",
 							"method": "GET",
 							"headers": {},
 							"linkedServices": [
