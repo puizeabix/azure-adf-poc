@@ -445,7 +445,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"command": {
-								"value": "@concat('/bin/bash -c \"docker login ', activity('GetDockerHost').output.value, ' --username ', activity('GetDockerUser').output.value , ' --password ', activity('GetDockerPassword').output.value, ' \"')",
+								"value": "@concat('/bin/bash -c \"docker login ', activity('GetDockerHost').output.value, ' --username ', activity('GetDockerUser').output.value , ' --password ', activity('GetDockerPassword').output.value, ' && docker run -v $(pwd)/activity.json:/activity.json azurebatchpoc.azurecr.io/securebatch:latest\"')",
 								"type": "Expression"
 							},
 							"resourceLinkedService": {
