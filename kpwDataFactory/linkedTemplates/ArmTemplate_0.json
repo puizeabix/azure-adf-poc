@@ -57,7 +57,7 @@
 		},
 		"Sftp1_properties_typeProperties_userName": {
 			"type": "string",
-			"defaultValue": "azureuser"
+			"defaultValue": "@{linkedService().sftpUser}"
 		},
 		"AzureBatchPOC_properties_typeProperties_batchUri": {
 			"type": "string",
