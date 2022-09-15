@@ -21,6 +21,10 @@
 			"dockerUsernameKVName": {
 				"type": "string",
 				"value": "docker-username"
+			},
+			"DockerHostKVName": {
+				"type": "string",
+				"value": "docker-host"
 			}
 		}
 	},
