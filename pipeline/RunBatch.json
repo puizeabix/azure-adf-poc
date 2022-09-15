@@ -7,7 +7,7 @@
 				"type": "Custom",
 				"dependsOn": [
 					{
-						"activity": "Web1",
+						"activity": "GetDockerUser",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -22,7 +22,10 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"command": "/bin/bash -c \"docker login azurebatchpoc.azurecr.io --username azurebatchpoc --password pNu+lsaSDa7D6ga3gkSNLSYNE4Xunhh4 && docker run -v $(pwd)/activity.json:/activity.json azurebatchpoc.azurecr.io/pocbatch:latest\"",
+					"command": {
+						"value": "@concat('/bin/bash -c \"docker login azurebatchpoc.azurecr.io --username ', activity('GetDockerUser').output.value , ' --password pNu+lsaSDa7D6ga3gkSNLSYNE4Xunhh4')",
+						"type": "Expression"
+					},
 					"resourceLinkedService": {
 						"referenceName": "AzureBlobBatch",
 						"type": "LinkedServiceReference"
@@ -83,7 +86,7 @@
 				}
 			},
 			{
-				"name": "Web1",
+				"name": "GetDockerUser",
 				"type": "WebActivity",
 				"dependsOn": [],
 				"policy": {
