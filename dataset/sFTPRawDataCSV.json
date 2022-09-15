@@ -3,7 +3,13 @@
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "Sftp1",
-			"type": "LinkedServiceReference"
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"sftpUser": {
+					"value": "@dataset().sftpUser",
+					"type": "Expression"
+				}
+			}
 		},
 		"parameters": {
 			"sftpUser": {
