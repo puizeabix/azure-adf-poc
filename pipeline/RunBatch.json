@@ -58,14 +58,6 @@
 							{
 								"referenceName": "AzureBlobArchived",
 								"type": "DatasetReference"
-							},
-							{
-								"referenceName": "AzureSQLUsersTable",
-								"type": "DatasetReference",
-								"parameters": {
-									"Secret": "AzureSqlDBSecret",
-									"SQLServerFQDN": "kpwdb.database.windows.net"
-								}
 							}
 						]
 					}
