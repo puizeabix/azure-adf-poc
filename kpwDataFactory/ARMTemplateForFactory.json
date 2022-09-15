@@ -931,7 +931,12 @@
 				"linkedServiceName": {
 					"referenceName": "Sftp1",
 					"type": "LinkedServiceReference",
-					"parameters": {}
+					"parameters": {
+						"sftpUser": {
+							"value": "@dataset().sftpUser",
+							"type": "Expression"
+						}
+					}
 				},
 				"parameters": {
 					"sftpUser": {
