@@ -6,13 +6,20 @@
 			{
 				"name": "CopySFTPToBlob",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "GetSFTPUsername",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
 					"retryIntervalInSeconds": 30,
 					"secureOutput": false,
-					"secureInput": false
+					"secureInput": true
 				},
 				"userProperties": [],
 				"typeProperties": {
@@ -53,7 +60,13 @@
 				"inputs": [
 					{
 						"referenceName": "sFTPRawDataCSV",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"sftpUser": {
+								"value": "@activity('GetSFTPUsername').output.value",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"outputs": [
@@ -62,6 +75,27 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "GetSFTPUsername",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": true,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://kpwkeyvault.vault.azure.net/secrets/sftp-username/fcd26ba866cd4597a9606e43960d9d98?api-version=7.0",
+					"method": "GET",
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://vault.azure.net"
+					}
+				}
 			}
 		],
 		"annotations": [],
