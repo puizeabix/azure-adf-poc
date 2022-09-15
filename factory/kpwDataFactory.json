@@ -18,7 +18,7 @@
 				"type": "string",
 				"value": "kpwadmin"
 			},
-			"dockerUsernameKVName": {
+			"DockerUsernameKVName": {
 				"type": "string",
 				"value": "docker-username"
 			},
