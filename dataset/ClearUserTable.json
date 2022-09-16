@@ -1,0 +1,22 @@
+{
+	"name": "ClearUserTable",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"KeyVaultSecretName": "AzureSqlDBSecret",
+				"FQDN": "kpwdb.database.windows.net",
+				"DBName": "datafactory",
+				"Username": "kpwadmin"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Users"
+		}
+	}
+}
